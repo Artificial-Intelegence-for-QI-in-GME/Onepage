@@ -1,0 +1,69 @@
+<div class="card" aria-expanded="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <h3>Jeopardy Game Generator</h3>
+      <p>Create a CSV file for a Jeopardy game using the specified format. Your dataset should include categories, questions, answers, point values, and additional attributes for each row, reflecting the game structure of Jeopardy and Double Jeopardy rounds, with a Final Jeopardy question included.</p>
+      <a href="https://chatgpt.com/g/g-6752821b266881919d8bbccab7fec528-ai-for-gme-jeopardy-https-jeopardy-app" target="_blank" rel="noopener" style="display:block;margin:0.5em 0;">Try the AI for GME Jeopardy Game</a>
+      <button class="reveal-button">Reveal Prompt</button>
+    </div>
+    <div class="card-back">
+      <div class="prompt-text">
+Create a CSV file for a Jeopardy game using the specified format. Your dataset should include categories, questions, answers, point values, and additional attributes for each row, reflecting the game structure of Jeopardy and Double Jeopardy rounds, with a Final Jeopardy question included. 
+
+- **CSV Columns**:
+  - **round**: Indicate the game phase ("jeopardy", "double", or "final").
+  - **cat**: The category name for the question.
+  - **val**: The point value of the question (0 for Final Jeopardy).
+  - **q**: The question text.
+  - **a**: The answer text.
+  - **dd**: Indicates if the question is a Daily Double (true/false).
+  - **x**: The category number.
+  - **y**: The question number within the category.
+
+# Steps
+
+1. **Determine Categories and Values**: Define up to 6 categories with a progression of point values (200, 400, 600, etc. for Jeopardy; up to 2000 for Double Jeopardy).
+   
+2. **Create Questions and Answers**: For each category, formulate appropriate questions and answers.
+   
+3. **Assign Attributes**: 
+   - Round (Jeopardy/Double Jeopardy)
+   - Determine if a question is a Daily Double
+   - Assign coordinates (x, y) for organization
+
+4. **Final Jeopardy**: Include one final question with value 0 and set `dd` to false; `x` and `y` as 1.
+
+# Output Format
+
+A structured CSV file with the specified column headings. Each row represents a question in the Jeopardy format.
+
+# Examples
+
+Start of CSV output:
+
+```
+round,cat,val,q,a,dd,x,y
+jeopardy,"A CATEGORY",200,"What is the capital of France?","Paris",true,1,1
+jeopardy,"A CATEGORY",400,"Name the largest planet in our solar system.","Jupiter",false,1,2
+jeopardy,"A CATEGORY",600,"In computer science, what does 'CPU' stand for?","Central Processing Unit",false,1,3
+...
+double,"ANOTHER CATEGORY",400,"Who wrote 'To Kill a Mockingbird'?","Harper Lee",false,2,1
+...
+final,"FINAL CATEGORY",0,"What is the only state in the U.S. that ends with the letter 'k'?","New York",false,1,1
+```
+
+# Notes
+
+- Ensure diversity in themes and topics across categories.
+- Avoid repetition and ensure all questions and answers are clearly stated.
+- Carefully select one or two Daily Doubles per round, not exceeding guidelines.
+- You must have it in the exact format listed in the attached file called 'example'
+-you must show all the data such as the question and answers in the data frame, so the user can review it as well as providing a CSV downloadable link
+      </div>
+      <div class="card-footer">
+        <button class="copy-button">Copy</button>
+        <button class="back-button">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

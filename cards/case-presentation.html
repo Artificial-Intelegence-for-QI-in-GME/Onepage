@@ -1,0 +1,238 @@
+<div class="card" aria-expanded="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <h3>Case Presentation Write-Up</h3>
+      <p>Write a formal case presentation for a [new admit/follow-up].</p>
+      <button class="reveal-button">Reveal Prompt</button>
+    </div>
+    <div class="card-back">
+      <div class="prompt-text">
+"Write a formal case presentation for a [new admit/follow-up] including HPI, ROS, PE, labs, imaging, and clinical impression suitable for teaching rounds."
+
+---
+Generate a LaTeX code for a presentation document based on the content provided in a specified template.
+
+# Details
+
+- You will be given a LaTeX template delimited by `<template></template>` tags.
+- The template will contain placeholders for specific sections of content.
+- Your goal is to fill in these placeholders with the appropriate content.
+
+# Steps
+
+1. Identify and extract the LaTeX template from within the `<template></template>` tags.
+2. Locate placeholders within the template that require custom content.
+3. Replace each placeholder with the respective content provided or generated.
+4. Ensure the resulting LaTeX code is correctly formatted for a presentation.
+
+# Output Format
+
+- Provide the complete LaTeX code for the presentation.
+- Ensure the code is well-structured and adheres to LaTeX syntax.
+
+# Examples
+
+**Example Input**:
+```plaintext
+<content>
+Document
+</content>
+```
+
+**Example Output**: 
+```latex
+\documentclass[18pt, a0paper, landscape]{tikzposter}
+
+% Define a custom color style using blue and white
+\definecolorstyle{BlueWhiteQIStyle} {
+    \definecolor{colorOne}{RGB}{0, 70, 139}  % Dark blue
+    \definecolor{colorOneTint}{RGB}{173, 216, 230}  % Light blue (AliceBlue)
+    \definecolor{colorTwo}{RGB}{255, 255, 255}  % White
+}{
+    % Background Colors
+    \colorlet{backgroundcolor}{colorTwo}
+    \colorlet{framecolor}{colorOne}
+    % Title Colors
+    \colorlet{titlebgcolor}{colorOne}
+    \colorlet{titlefgcolor}{colorTwo}
+    % Block Colors
+    \colorlet{blocktitlebgcolor}{colorOne}
+    \colorlet{blocktitlefgcolor}{colorTwo}
+    \colorlet{blockbodybgcolor}{colorTwo}
+    \colorlet{blockbodyfgcolor}{black}
+    % Innerblock Colors
+    \colorlet{innerblocktitlebgcolor}{colorOneTint}
+    \colorlet{innerblocktitlefgcolor}{colorOne}
+    \colorlet{innerblockbodybgcolor}{colorTwo}
+    \colorlet{innerblockbodyfgcolor}{black}
+    % Note colors
+    \colorlet{notefgcolor}{black}
+    \colorlet{notebgcolor}{colorOneTint}
+    \colorlet{noteframecolor}{colorOne}
+}
+
+\usecolorstyle{BlueWhiteQIStyle}
+
+\title{
+    \begin{minipage}{0.2\textwidth}
+        \centering
+        \includegraphics[height=8cm]{ME_Logo_V.jpg}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \fontsize{66}{80}\selectfont Graves' Disease Case Presentation \\
+        \vspace{0.5cm}
+        \fontsize{33}{40}\selectfont \textbf{Your Name, Co-authors} \\ 
+        \fontsize{33}{40}\selectfont \textbf{Internal Medicine Residency Program}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        \left
+        \includegraphics[height=8cm]{KPLogo.jpg}
+    \end{minipage}
+}
+
+\begin{document}
+\maketitle[width=\textwidth]
+
+\begin{columns}
+
+% First Column
+\column{0.33}
+
+\block[roundedcorners=15]{Introduction and Background} {
+    Graves’ disease is the most common cause of hyperthyroidism, particularly among women aged 30-50 years. It is an autoimmune disorder in which thyroid-stimulating immunoglobulins (TSI) mimic TSH, resulting in excessive thyroid hormone production. 
+    \newline
+    \textbf{Pathophysiology:} 
+    The hyperactivity of the thyroid gland leads to increased levels of free T3 and T4, with suppression of TSH. Autoimmune mechanisms are driven by genetic predisposition and environmental triggers (e.g., stress, infections). Graves' disease often presents with extrathyroidal manifestations like ophthalmopathy and dermopathy (pretibial myxedema).
+    \newline
+    \textbf{Epidemiology:} 
+    Affects 0.5-2\% of the general population, with a higher incidence in females. Smoking is a known risk factor, particularly for the development of ophthalmopathy.
+}
+
+\block[roundedcorners=15]{Patient Presentation} {
+    \textbf{Chief Complaint:} "I’ve been feeling jittery, losing weight, and my eyes seem swollen." 
+    \newline
+    \textbf{History of Present Illness:} 
+    35-year-old woman presents with a 2-month history of palpitations, weight loss (10 lbs), and heat intolerance. She reports increased irritability, difficulty sleeping, and muscle weakness. Additionally, she has noticed swelling around her eyes with occasional double vision.
+    \newline
+    \textbf{Past Medical History:} No prior history of thyroid dysfunction. Family history includes maternal hyperthyroidism.
+    \newline
+    \textbf{Social History:} Non-smoker, no alcohol or recreational drug use. Works as an office manager with recent job stress.
+}
+
+\block[roundedcorners=15]{Physical Examination} {
+    \begin{itemize}
+        \item \textbf{Vital Signs:} BP 140/90 mmHg, HR 110 bpm (tachycardia), Temp 37.8°C
+        \item \textbf{General Appearance:} Anxious, tremulous, thin build.
+        \item \textbf{Thyroid Exam:} Diffuse, non-tender goiter with no palpable nodules.
+        \item \textbf{Cardiovascular:} Tachycardia, regular rhythm, no murmurs.
+        \item \textbf{Ophthalmologic:} Bilateral exophthalmos, mild periorbital edema, limited upward gaze.
+        \item \textbf{Neurological:} Fine tremor of both hands, brisk deep tendon reflexes.
+    \end{itemize}
+}
+
+% Second Column
+\column{0.33}
+
+\block[roundedcorners=15]{Diagnostic Workup} {
+    \textbf{Laboratory Tests:} 
+    \begin{itemize}
+        \item TSH: \(<0.01\) mIU/L (Low)
+        \item Free T4: 3.2 ng/dL (High)
+        \item Free T3: 5.8 pg/mL (High)
+        \item Thyroid-Stimulating Immunoglobulins (TSI): Positive
+    \end{itemize}
+    \textbf{Imaging and Additional Testing:}
+    \begin{itemize}
+        \item \textbf{Radioactive Iodine Uptake (RAIU):} 
+        24-hour uptake at 52\% (elevated), consistent with Graves’ disease.
+        \item \textbf{Ultrasound:} Diffusely enlarged thyroid gland without focal nodules.
+    \end{itemize}
+}
+
+\block[roundedcorners=15]{Differential Diagnosis} {
+    \begin{itemize}
+        \item \textbf{Graves' Disease} – Supported by RAIU results and TSI positivity.
+        \item \textbf{Toxic Multinodular Goiter} – Ruled out by absence of nodules on ultrasound.
+        \item \textbf{Thyroiditis} – Typically associated with low RAIU uptake.
+        \item \textbf{Exogenous Thyroid Hormone Use} – Patient denies use of thyroid supplements.
+    \end{itemize}
+}
+
+\block[roundedcorners=15]{Management Plan} {
+    \textbf{Step 1: Symptomatic Management} 
+    \begin{itemize}
+        \item \textbf{Beta-Blockers:} Propranolol 40 mg BID to control palpitations and tremor.
+    \end{itemize}
+    \textbf{Step 2: Antithyroid Therapy}
+    \begin{itemize}
+        \item \textbf{Methimazole:} 10-20 mg daily, with regular monitoring of thyroid function.
+    \end{itemize}
+    \textbf{Step 3: Ophthalmopathy Management}
+    \begin{itemize}
+        \item Referral to ophthalmology for evaluation of orbital decompression if necessary.
+    \end{itemize}
+    \textbf{Step 4: Definitive Treatment Options}
+    \begin{itemize}
+        \item Radioactive iodine (RAI) therapy as long-term solution if symptoms persist.
+        \item Consider surgery (thyroidectomy) for patients with compressive symptoms or pregnancy.
+    \end{itemize}
+}
+
+% Third Column
+\column{0.33}
+
+\block[roundedcorners=15]{Complications of Graves' Disease} {
+    \begin{itemize}
+        \item Atrial Fibrillation – Risk increases with untreated hyperthyroidism.
+        \item Osteoporosis – Due to accelerated bone turnover.
+        \item Thyroid Storm – A life-threatening condition with severe hyperthyroidism.
+        \item Vision Loss – Severe ophthalmopathy may lead to corneal ulceration.
+    \end{itemize}
+}
+
+\block[roundedcorners=15]{Follow-Up and Monitoring} {
+    \begin{itemize}
+        \item Monitor TSH, Free T4 every 4-6 weeks initially to adjust therapy.
+        \item Watch for agranulocytosis (rare side effect of methimazole).
+        \item Reassess ophthalmopathy regularly.
+    \end{itemize}
+}
+
+\block[roundedcorners=15]{Conclusion} {
+    This case demonstrates the importance of early diagnosis and a multidisciplinary approach to Graves’ disease, including medical management, symptomatic relief, and long-term follow-up to prevent complications.
+}
+
+\block[roundedcorners=15]{Ethical Considerations} {
+    \begin{itemize}
+        \item Informed consent for radioactive iodine therapy.
+        \item Confidentiality maintained throughout the clinical process.
+        \item Ensured equitable access to follow-up care and treatment.
+    \end{itemize}
+}
+
+\end{columns}
+
+\end{document}
+
+```
+
+(Real examples should be fully developed with each placeholder filled-in with relevant presentation content. Longer content segments should be developed based on the presentation goals and themes.)
+
+# Notes
+
+- Pay attention to common LaTeX errors, such as mismatched brackets or misformatted commands.
+- Verify that the presentation structure is logical and flows smoothly.
+- Double-check that all necessary sections are filled out and align with the template structure.
+
+Open the resulting LaTeX code in https://www.overleaf.com/project for editing and presentation.
+      </div>
+      <div class="card-footer">
+        <button class="copy-button">Copy</button>
+        <button class="back-button">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="card" aria-expanded="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <h3>Sign-Out</h3>
+      <p>Create a sign-out script for [night float/handoff].</p>
+      <button class="reveal-button">Reveal Prompt</button>
+    </div>
+    <div class="card-back">
+      <div class="prompt-text">
+"Create a sign-out script for [night float/handoff] using IPASS. Highlight anticipatory guidance, action items, and critical updates in a concise, safe format."
+
+---
+**Patient Signout Using IPASS Framework**
+
+**Reference Medical Information:** Information for summarizing is marked within <>. Today's notes are labeled as < 
+Todays notes eg ER Case
+>. Yesterday's signout is <
+Previous Notes Okay scattered
+>. 
+
+**Rules for Signout Creation:**
+1. **Illness Severity [Bracketed Section]:** Options are 'stable', '#Watcher#', or '##Unstable##'.
+2. **Patient Summary:** This section should include the final diagnosis, omitting initial symptom presentation.
+3. **Team to Do:** List the BIG PICTURE action plan.
+4. **Situational Analysis:** Includes  “Contingency Plan” 
+5.  **Cross Cover actions they must do over night:** “XCover to do.”
+6. **Style:** Write all information in medical shorthand.
+7. **Vitals and Severity Adjustment:** If new vitals meet SIRS criteria or heart rate exceeds systolic blood pressure, classify illness severity as '##Unstable##'. Add contingency plans in “if x, then y” format based on worsening syndromes or diagnosis.
+8. **Updating Patient Summary:** Update with the final diagnosis, removing initial symptom presentation.
+
+**Example Signouts:**
+
+**Example 1:** [Stable] Full Code - Default [Silver]
+- **PATIENT SUMMARY:** 67F, PMH HFpEF, recurrent SBOs secondary to ventral hernia, GI and Surgery aware. 
+- **Team to do:** 
+   - [ ] Schedule small bowel follow-through on 7/31.
+- **Contingency Plan:** 
+   - [ ] If N/V, see patient to check NGT placement.
+   - [ ] If fever, perform BCX, switch Unasyn to Zosyn, and check L neck swelling.
+- **Xcover to do:** 
+   - [ ] NTD (Nothing to Do).
+
+**Example 2:** [##Watcher##] Full Code - Confirmed [Silver]
+- **PATIENT SUMMARY:** 83YOM, PMH AAA, T2DM with suspected sepsis from UTI and an underlying undiagnosed malignancy due to and 25lb weight loss over a year.
+- **Team to do:** 
+   - [ ] Investigate for septic shock.
+- **Contingency Plan:** 
+   - [ ] If fever, then pan culture.
+   - [ ] If Hg < 7, transfuse 1 U PRBC.
+   - [ ] If AMS, perform bladder scan (checking for retention).
+- **Xcover to do:** 
+   - [ ] NTD in ICU.
+      </div>
+      <div class="card-footer">
+        <button class="copy-button">Copy</button>
+        <button class="back-button">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,189 @@
+<div class="card" aria-expanded="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <h3>Differential Diagnosis</h3>
+      <p>Generate a differential diagnosis for [chief complaint].</p>
+      <button class="reveal-button">Reveal Prompt</button>
+    </div>
+    <div class="card-back">
+      <div class="prompt-text">
+// Your task is to construct a Diagnosis / Differential Diagnosis (DDx) based on a clinical problem representation. You are to ONLY focus on this section of the note and not any others. The medical decision making and differential diagnosis are the most important part of a doctors aspects of their profession and can be life or death therefor ruling out other causes is the most important job of a physician. 
+
+// Role: 
+HOS
+// You must use structured thinking by using a pneumonic-  VITAMINSABCDEK. 
+Improved Prompt
+
+```markdown
+#### Task Description:
+For a given medical syndrome described succinctly, evaluate and rank various potential causes based on their likelihood of being responsible for the syndrome. The ranking should range from 1 to 15, where 1 represents the most likely cause and 15 the least likely of causing the disease described in the 'clinical problem representation' demarcated by '[]'.
+
+#### Output Format:
+Provide your assessments in a structured JSON format. Each category should include a detailed description and a likelihood rating based on the syndrome provided.
+
+#### Detailed Category Descriptions:
+- **Vascular**: Pertains to diseases caused by issues with blood vessels, such as blockages or hemorrhages, and other hematological conditions.
+- **Infective/Post-infective**: Relates to conditions that originate from infections or their long-term consequences.
+- **Trauma**: Involves conditions resulting from physical injuries or external mechanical impacts.
+- **Autoimmune/Allergy**: Includes diseases stemming from immune system malfunctions or allergic reactions.
+- **Metabolic**: Concerns disorders that affect the metabolism of fats, proteins, carbohydrates, or micronutrients.
+- **Idiopathic/Iatrogenic**: Encompasses conditions with unknown origins or those caused by medical treatments and interventions.
+- **Neoplasia**: Involves conditions related to abnormal cell growths or cancers.
+- ** Neurologic**: Involves conditions related to peripheral or central neurologic diseases.
+- **Social**: Pertains to conditions influenced by social factors, such as abuse or deprivation.
+- **Alcohol**: Relates to diseases caused by excessive or prolonged alcohol consumption.
+- **Behavioral**: Involves conditions that arise from psychological or behavioral issues.
+- **Congenital**: Covers inborn conditions that could include elements from any of the above categories.
+- **Degenerative/Drug**: Concerns conditions caused by tissue degeneration or adverse reactions to drugs.
+- **Endocrine/Exocrine**: Involves disorders related to hormonal or glandular dysfunction.
+- **Karyotype**: Pertains to genetic or chromosomal anomalies.
+
+#### Example Format needs to be in JSON:
+{
+  "VITAMINNSABCDEK": {
+    "Vascular": {
+      "Description": "Diseases caused by blood vessel issues (bleed or blockage) or hematological conditions.",
+      "Likelihood": "Rank the likelihood from 1-15 of the disease being evaluated as the primary diagnosis: 1"
+    },
+    "Infective/Post-infective": {
+      "Description": "Conditions resulting from infections or their sequelae.",
+      "Likelihood": "Rank the likelihood from 1-15 of the disease being evaluated as the primary diagnosis: 5"
+    },
+    "Trauma": {
+      "Description": "Conditions caused by physical injury or mechanical factors.",
+      "Likelihood": "Rank the likelihood from 1-15 of the disease being evaluated as the primary diagnosis: 4"
+    },
+    "Autoimmune/Allergy": {
+      "Description": "Diseases related to immune system dysfunction or allergic reactions.",
+      "Likelihood": "Rank the likelihood from 1-15 of the disease being evaluated as the primary diagnosis: 8"
+    },
+    "Metabolic": {
+      "Description": "Disorders affecting metabolism of lipids, proteins, carbohydrates, or micronutrients.",
+      "Likelihood": "Rank the likelihood from 1-15 of the disease being evaluated as the primary diagnosis: 7"
+    },
+    "Idiopathic/Iatrogenic": {
+      "Description": "Conditions with unknown causes or caused by medical interventions.",
+      "Likelihood": "Rank the likelihood from 1-15 of the disease being evaluated as the primary diagnosis: 6"
+    },
+    "Neoplasia": {
+      "Description": "Conditions related to abnormal growths or cancers.",
+      "Likelihood": "Rank the likelihood from 1-15 of the disease being evaluated as the primary diagnosis: 9"
+    },
+    "Neurologic": {
+      "Description": "Conditions related to peripheral or central neurologic diseases.",
+      "Likelihood": "Rank the likelihood from 1-15 of the disease being evaluated as the primary diagnosis: 15"
+    },
+    "Social": {
+      "Description": "Conditions influenced by social factors like abuse or deprivation.",
+      "Likelihood": "Rank the likelihood from 1-15 of the disease being evaluated as the primary diagnosis: 13"
+    },
+    "Alcohol": {
+      "Description": "Diseases related to alcohol consumption.",
+      "Likelihood": 12
+    },
+    "Behavioral": {
+      "Description": "Conditions stemming from psychological or behavioral issues.",
+      "Likelihood": 11
+    },
+    "Congenital": {
+      "Description": "Inborn conditions which could encompass any of the above categories.",
+      "Likelihood": 14
+    },
+    "Degenerative/Drug": {
+      "Description": "Conditions caused by tissue degeneration or adverse drug reactions.",
+      "Likelihood": 10
+    },
+    "Endocrine/Exocrine": {
+      "Description": "Disorders involving hormonal or glandular dysfunction.",
+      "Likelihood": 3
+    },
+    "Karyotype": {
+      "Description": "Genetic or chromosomal anomalies.",
+      "Likelihood": 2
+    }
+  }
+}
+#### Example Input:
+"A patient presents with sudden onset of severe headache, blurred vision, and dizziness."
+
+#### Example Output:
+{
+  "VITAMINNSABCDEK": {
+    "Vascular": {
+      "Description": "Vertebrobasilar insufficiency, Carotid artery stenosis, Dissection of vertebral artery",
+      "Rank": 1
+    },
+    "Infective/Post-infective": {
+      "Description": "Viral labyrinthitis, Bacterial meningitis, Encephalitis",
+      "Rank": 5
+    },
+    "Trauma": {
+      "Description": "Concussion, Cervical spine injury, Temporal bone fracture",
+      "Rank": 4
+    },
+    "Autoimmune/Allergy": {
+      "Description": "Multiple sclerosis, Systemic lupus erythematosus, Autoimmune inner ear disease",
+      "Rank": 8
+    },
+    "Metabolic": {
+      "Description": "Hypoglycemia, Hyperglycemia, Electrolyte imbalances",
+      "Rank": 7
+    },
+    "Idiopathic/Iatrogenic": {
+      "Description": "Benign paroxysmal positional vertigo (BPPV), Idiopathic sudden sensorineural hearing loss, Drug-induced ototoxicity",
+      "Rank": 6
+    },
+    "Neoplasia": {
+      "Description": "Acoustic neuroma, Brain metastases, Meningioma",
+      "Rank": 9
+    },
+    "Neurologic": {
+      "Description": "Stroke, Multiple system atrophy, Migraine-associated vertigo",
+      "Rank": 2
+    },
+    "Social": {
+      "Description": "Anxiety disorders, Depression, Psychogenic dizziness",
+      "Rank": 13
+    },
+    "Alcohol": {
+      "Description": "Alcohol intoxication, Alcohol withdrawal, Wernicke's encephalopathy",
+      "Likelihood": 12
+    },
+    "Behavioral": {
+      "Description": "Somatization disorder, Panic attacks, Conversion disorder",
+      "Rank": 11
+    },
+    "Congenital": {
+      "Description": "Chiari malformation, Congenital sensorineural hearing loss, Usher syndrome",
+      "Rank": 14
+    },
+    "Degenerative/Drug": {
+      "Description": "Ototoxicity from medications, Age-related degeneration of vestibular function, Neurodegenerative diseases",
+      "Rank": 10
+    },
+    "Endocrine/Exocrine": {
+      "Description": "Thyroid dysfunction, Diabetes complications, Adrenal insufficiency",
+      "Rank": 3
+    },
+    "Karyotype": {
+      "Description": "Turner syndrome, Down syndrome, Klinefelter syndrome",
+      "Rank": 15
+    }
+  }
+}
+
+#### Instructions:
+Ensure that your ratings are meticulously based on the syndrome description provided. Rank the likelihood ratings accordingly, reflecting a deep understanding of the potential causes and their relevance to the described symptoms.
+#### Clinical Problem Representation: <<<
+** One Liner: [ 
+diagnosis-problem-summary
+]
+>>>
+      </div>
+      <div class="card-footer">
+        <button class="copy-button">Copy</button>
+        <button class="back-button">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,157 @@
+<div class="card" aria-expanded="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <h3>Literature Review LaTeX</h3>
+      <p>Given an uploaded article, generate a filled appraisal in LaTeX code. See on <a href="https://www.overleaf.com/" target="_blank">Overleaf</a>.</p>
+      <button class="reveal-button">Reveal Prompt</button>
+    </div>
+    <div class="card-back">
+      <div class="prompt-text">
+Given the uploaded article, fill out and populate the appraisal form and export the results into a LaTeX code block.
+
+Fill out an appraisal form based on a provided article and export the results into a LaTeX code block.
+
+Begin by analyzing the uploaded article and identify the key sections required for the appraisal. Then, complete the appraisal form with the relevant details extracted from the article.
+
+# Steps
+
+1. **Analyze the Article**: Review the uploaded article to identify key points, sections, and relevant information.
+2. **Extract Key Information**: Identify and extract the necessary data from the article, such as title, authors, abstract, introduction, methodology, results, and conclusion.
+3. **Complete the Appraisal Form**: Populate the predefined appraisal structure with the information extracted from the article.
+4. **Prepare LaTeX Code**: Convert the completed appraisal into a LaTeX format and prepare it for export as a code block.
+
+# Notes
+
+- Ensure that all elements in the appraisal form adhere to the LaTeX syntax rules.
+- Consider edge cases such as missing sections or atypical formatting in the article and adjust as necessary.
+- You are trained on data up to October 2023; ensure the most current LaTeX practices are used.
+
+```latex
+\documentclass{article}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{qrcode}  % To generate a QR code
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{Infographic by Alex Dummett}
+\fancyfoot[R]{\thepage}
+
+% Set vibrant colors for sections
+\definecolor{sectioncolor}{RGB}{52, 152, 219}
+\definecolor{methodcolor}{RGB}{46, 204, 113}
+\definecolor{resultcolor}{RGB}{231, 76, 60}
+\definecolor{limitationcolor}{RGB}{155, 89, 182}
+\definecolor{conclusioncolor}{RGB}{241, 196, 15}
+
+\begin{document}
+
+% Title box
+\begin{tcolorbox}[colback=sectioncolor!10!white, colframe=sectioncolor, width=\textwidth, arc=0mm, boxrule=1mm]
+    \centering
+    \LARGE \textbf{Infographic: Summary of Journal Article Study (PICOTT Format)}
+\end{tcolorbox}
+
+\vspace{1cm}
+
+% PICOTT Section
+\begin{tcolorbox}[colback=methodcolor!10!white, colframe=methodcolor, width=\textwidth, arc=0mm, boxrule=1mm]
+    \textbf{PICOTT Format:} \\
+    
+    \textbf{P - Population:} Describe the target population. \\
+    
+    \vspace{0.5cm}
+    \textbf{I - Intervention:} The intervention or treatment being studied. \\
+    
+    \vspace{0.5cm}
+    \textbf{C - Comparison:} The control or alternative intervention (e.g., Standard care, placebo). \\
+    
+    \vspace{0.5cm}
+    \textbf{O - Outcome:} The primary outcome being measured (e.g., Decrease in blood sugar levels, reduction in mortality). \\
+    
+    \vspace{0.5cm}
+    \textbf{T - Time:} The time frame of the study (e.g., 6 months follow-up, 1 year study period). \\
+    
+    \vspace{0.5cm}
+    \textbf{T - Type of Question:} Type of clinical question (e.g., Diagnosis, Therapy, Prognosis, Harm). \\
+    
+    \vspace{0.5cm}
+    \textbf{T - Type of Study:} Type of study design (e.g., Randomized controlled trial, Cohort study, Case-control study).
+\end{tcolorbox}
+
+\vspace{1cm}
+
+% Results section with 3 columns and impactful visualization
+\begin{tcolorbox}[colback=resultcolor!10!white, colframe=resultcolor, width=\textwidth, arc=0mm, boxrule=1mm]
+    \textbf{Results}
+    \begin{multicols}{3}
+        % Control Group column
+        \begin{center}
+        \textbf{Control Group} \\
+        \includegraphics[width=0.9\columnwidth]{control_placeholder.png} \\
+        {\Huge \textbf{120}} \\
+        \small (Number of events)\\
+        {\Large \textbf{Risk: 25\%}} \\
+        \end{center}
+        
+        % Significance column
+        \columnbreak
+        \begin{center}
+        \textbf{Significance} \\
+        {\Huge \textbf{p = 0.001}} \\
+        \small (95\% Confidence Interval)\\
+        {\Large \textbf{RR: 0.75}} \\
+        \end{center}
+        
+        % Intervention Group column
+        \columnbreak
+        \begin{center}
+        \textbf{Intervention Group} \\
+        \includegraphics[width=0.9\columnwidth]{intervention_placeholder.png} \\
+        {\Huge \textbf{80}} \\
+        \small (Number of events)\\
+        {\Large \textbf{Risk: 16\%}} \\
+        \end{center}
+    \end{multicols}
+\end{tcolorbox}
+
+\vspace{1cm}
+
+% Limitations and Discussion Section with dynamic placeholders based on study type
+\begin{tcolorbox}[colback=limitationcolor!10!white, colframe=limitationcolor, width=\textwidth, arc=0mm, boxrule=1mm]
+    \textbf{Limitations, Discussion, and Study-Specific Questions:}
+    
+    \textbf{Study Type:} \emph{Randomized Controlled Trial (or other type)}
+    
+    \vspace{0.5cm}
+    \textbf{RCT Questions:} \\
+    \textit{For RCTs, include these considerations:}
+    \begin{itemize}
+        \item Was the randomization process truly random and well-concealed?
+        \item Were all patients accounted for at the end (intention-to-treat analysis)?
+        \item Was the blinding adequate (patients, caregivers, outcome assessors)?
+        \item What level of bias might be present (selection, performance, detection)?
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    \textbf{Cohort Study Questions:} \\
+    \textit{For cohort studies, consider the following:}
+    \begin{itemize}
+        \item Were the participants in both the exposed and unexposed groups similar at the start?
+        \item How was the exposure measured, and was it objective?
+        \item Was follow-up sufficiently long and complete?
+        \item Were confounding variables controlled for adequately?
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    \textbf{Case-Control Study Questions:} \\
+    \textit{For case-control studies, think about:}
+    \begin{itemize}
+        \item How were cases and controls selected, and were they comparable?
+        \item Was recall bias a concern in how exposure was measured?
+        \item Were confounders considered and controlled?
+    </

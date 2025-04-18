@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatGPT Prompts for UME/GME Medical Education</title>
+  <base href="./">
+  <link rel="stylesheet" href="onepagerstyle.css" />
+</head>
+<body>
+  <header>
+    <div class="header-img"></div>
+    <h1 style="display:inline">LLM Prompts for UME/GME Medical Education</h1>
+  </header>
+  <div class="banner">Scroll below to explore structured, specialty-aligned prompts designed for medical education excellence</div>
+  <div class="filter">
+    <input id="search-input" type="search" placeholder="Filter prompts..." aria-label="Filter prompts" />
+    <span style="margin-left:1rem; font-size:0.95em;">
+      <a href="https://chatgpt.com/" target="_blank" rel="noopener" style="margin-right:0.5em;">ChatGPT</a>|
+      <a href="https://gemini.google.com/app" target="_blank" rel="noopener" style="margin-right:0.5em;">Gemini</a>|
+      <a href="https://claude.ai/login?returnTo=%2F%3F" target="_blank" rel="noopener" style="margin-right:0.5em;">Claude</a>|
+      <a href="https://lmarena.ai/?leaderboard" target="_blank" rel="noopener" style="margin-right:0.5em;">OpenArena</a>|
+      <a href="https://www.overleaf.com/" target="_blank" rel="noopener" style="margin-right:0.5em;">Overleaf</a>|
+      <a href="https://notebooklm.google.com/" target="_blank" rel="noopener" style="margin-right:0.5em;">NotebookLM</a>|
+      <a href="https://draw.io/" target="_blank" rel="noopener" style="margin-right:0.5em;">draw.io</a>|
+      <a href="https://platform.openai.com/playground/" target="_blank" rel="noopener" style="margin-right:0.5em;">OpenAI Playground</a>|
+      <a href="https://console.anthropic.com/dashboard" target="_blank" rel="noopener">Anthropic Console</a>
+    </span>
+  </div>
+  <main class="container" id="cards-container"></main>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Utility to show all cards
+      function showAllCards() {
+        document.querySelectorAll('.card').forEach(c => c.style.display = '');
+      }
+
+      // Attach copy button event listeners
+      function attachCopyListeners() {
+        document.querySelectorAll('.copy-button').forEach(button => {
+          button.addEventListener('click', () => {
+            const promptElement = button.closest('.card-back').querySelector('.prompt-text');
+            if (!promptElement) return;
+            const prompt = promptElement.textContent || promptElement.innerText || '';
+            navigator.clipboard.writeText(prompt).then(() => {
+              button.textContent = 'Copied!';
+              button.classList.add('copied');
+              const back = button.closest('.card-back');
+              back.classList.add('copied');
+              setTimeout(() => {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+                back.classList.remove('copied');
+              }, 2000);
+            });
+          });
+        });
+      }
+
+      // List all your card files here
+      const cardFiles = [
+        './cards/email-writing.html',
+        './cards/illness-scripts.html',
+        './cards/management-script.html',
+        './cards/evaluation-feedback.html',
+        './cards/management.html',
+        './cards/data-analysis.html',
+        './cards/question-generation.html',
+        './cards/diagnostic-reasoning.html',
+        './cards/case-presentation.html',
+        './cards/assessment-plan.html',
+        './cards/differential-diagnosis.html',
+        './cards/social-determinants.html',
+        './cards/sign-out.html',
+        './cards/simulation.html',
+        './cards/in-basket.html',
+        './cards/general-learning-points.html',
+        './cards/literature-review-latex.html',
+        './cards/ddx.html'
+      ];
+
+      const container = document.getElementById('cards-container');
+      container.style.display = 'grid';
+      container.style.gridTemplateColumns = 'repeat(3, 1fr)';
+      container.style.gap = '1rem';
+
+      // Load cards and attach event listeners
+      cardFiles.forEach(file => {
+        fetch(file)
+          .then(res => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.text();
+          })
+          .then(html => {
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+            const card = temp.querySelector('.card');
+            if (card) {
+              container.appendChild(card);
+
+              const revealBtn = card.querySelector('.reveal-button');
+              const backBtn = card.querySelector('.back-button');
+
+              if (revealBtn) {
+                revealBtn.addEventListener('click', () => {
+                  if (card.classList.contains('flipped')) {
+                    card.classList.remove('flipped');
+                    card.setAttribute('aria-expanded', 'false');
+                    showAllCards();
+                  } else {
+                    card.classList.add('flipped');
+                    card.setAttribute('aria-expanded', 'true');
+                    document.querySelectorAll('.card').forEach(c => {
+                      if (c !== card) c.style.display = 'none';
+                    });
+                  }
+                });
+              }
+
+              if (backBtn) {
+                backBtn.addEventListener('click', () => {
+                  card.classList.remove('flipped');
+                  card.setAttribute('aria-expanded', 'false');
+                  showAllCards();
+                });
+              }
+            } else {
+              console.warn('No .card found in', file);
+            }
+            attachCopyListeners();
+          })
+          .catch(err => console.error('❌ Failed to load', file, err));
+      });
+
+      // Back button event listeners for any existing cards (if any)
+      document.querySelectorAll('.back-button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.card');
+          card.classList.remove('flipped');
+          card.setAttribute('aria-expanded', 'false');
+          showAllCards();
+        });
+      });
+
+      // Escape key closes flipped cards
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.card.flipped').forEach(card => {
+            card.classList.remove('flipped');
+            card.setAttribute('aria-expanded', 'false');
+          });
+          showAllCards();
+        }
+      });
+
+      // Search filter
+      document.getElementById('search-input').addEventListener('input', e => {
+        const term = e.target.value.toLowerCase();
+        document.querySelectorAll('.card').forEach(card => {
+          const title = card.querySelector('h3').textContent.toLowerCase();
+          card.style.display = title.includes(term) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

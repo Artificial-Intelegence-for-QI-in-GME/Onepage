@@ -1,0 +1,55 @@
+<div class="card" aria-expanded="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <h3>Data Analysis</h3>
+      <p>Analyze the following educational dataset.</p>
+      <button class="reveal-button">Reveal Prompt</button>
+    </div>
+    <div class="card-back">
+      <div class="prompt-text">
+        "Using the PACE (Plan, Analyze, Communicate, Evaluate) framework, analyze the following educational dataset: [describe]. 
+
+Plan:
+- Define the research question(s) and hypotheses.
+- Identify variables of interest and data types.
+- Specify the statistical methods appropriate for the data.
+
+Analyze:
+- Load and inspect the dataset in Python (e.g., using pandas).
+- Clean and preprocess the data (handle missing values, outliers, data types).
+- Generate descriptive statistics (Table 1: demographics/baseline characteristics).
+- For categorical variables, create frequency tables and cross-tabulations (Table 2).
+- For continuous variables, calculate means, medians, standard deviations, and ranges.
+- Conduct inferential statistics as appropriate (e.g., t-tests, chi-square, ANOVA, regression) and summarize results (Tables 3, 4, 5 as needed).
+- Visualize key findings with appropriate plots (bar charts, boxplots, scatterplots).
+
+Communicate:
+- Summarize key insights and trends in plain language for decision-makers in GME/UME.
+- Present results in publication-ready tables and figures.
+- Highlight limitations and implications.
+
+Evaluate:
+- Assess the robustness and reproducibility of the analysis.
+- Suggest next steps or further analyses.
+
+Python Steps Example:
+1. Import libraries: pandas, numpy, scipy, matplotlib, seaborn, statsmodels.
+2. Load data: df = pd.read_csv('yourfile.csv')
+3. Inspect data: df.info(), df.describe(), df.head()
+4. Clean data: handle missing values, encode categorical variables.
+5. Table 1: df.describe(include='all'), df['variable'].value_counts()
+6. Table 2+: pd.crosstab(df['var1'], df['var2']), groupby analyses.
+7. Statistical tests: from scipy.stats import ttest_ind, chi2_contingency, etc.
+8. Regression: import statsmodels.api as sm; model = sm.OLS(y, X).fit()
+9. Visualizations: df['var'].hist(), sns.boxplot(x, y), etc.
+10. Export tables/figures: df.to_csv('table1.csv'), plt.savefig('figure1.png')
+
+Summarize all findings and recommendations for publication."
+      </div>
+      <div class="card-footer">
+        <button class="copy-button">Copy</button>
+        <button class="back-button">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
