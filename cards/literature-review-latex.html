@@ -6,7 +6,7 @@
       <button class="reveal-button">Reveal Prompt</button>
     </div>
     <div class="card-back">
-      <div class="prompt-text">
+      <div class="prompt-text" style="margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
 Given the uploaded article, fill out and populate the appraisal form and export the results into a LaTeX code block.
 
 Fill out an appraisal form based on a provided article and export the results into a LaTeX code block.
@@ -96,11 +96,11 @@ Begin by analyzing the uploaded article and identify the key sections required f
         {\Huge \textbf{120}} \\
         \small (Number of events)\\
         {\Large \textbf{Risk: 25\%}} \\
-        \end{center>
+        </center>
         
         % Significance column
-        <columnbreak>
-        <begin center>
+        \columnbreak
+        <center>
         \textbf{Significance} \\
         {\Huge \textbf{p = 0.001}} \\
         \small (95\% Confidence Interval)\\
@@ -108,81 +108,59 @@ Begin by analyzing the uploaded article and identify the key sections required f
         </center>
         
         % Intervention Group column
-        <columnbreak>
-        <begin center>
+        \columnbreak
+        <center>
         \textbf{Intervention Group} \\
         \includegraphics[width=0.9\columnwidth]{intervention_placeholder.png} \\
         {\Huge \textbf{80}} \\
         \small (Number of events)\\
         {\Large \textbf{Risk: 16\%}} \\
         </center>
-    </end multicols>
-</end tcolorbox>
+    </end{multicols}
+</end{tcolorbox>
 
-<vspace 1cm>
+\vspace{1cm}
 
 % Limitations and Discussion Section with dynamic placeholders based on study type
-<begin tcolorbox colback=limitationcolor!10!white, colframe=limitationcolor, width=\textwidth, arc=0mm, boxrule=1mm>
+<begin{tcolorbox}[colback=limitationcolor!10!white, colframe=limitationcolor, width=\textwidth, arc=0mm, boxrule=1mm]>
     \textbf{Limitations, Discussion, and Study-Specific Questions:}
     
     \textbf{Study Type:} \emph{Randomized Controlled Trial (or other type)}
     
-    <vspace 0.5cm>
+    <vspace{0.5cm}>
     \textbf{RCT Questions:} \\
     \textit{For RCTs, include these considerations:}
-    <begin itemize>
-        <item Was the randomization process truly random and well-concealed?>
-        <item Were all patients accounted for at the end (intention-to-treat analysis)?>
-        <item Was the blinding adequate (patients, caregivers, outcome assessors)?>
-        <item What level of bias might be present (selection, performance, detection)?>
-    </end itemize>
+    <begin{itemize}>
+        <item>Was the randomization process truly random and well-concealed?</item>
+        <item>Were all patients accounted for at the end (intention-to-treat analysis)?</item>
+        <item>Was the blinding adequate (patients, caregivers, outcome assessors)?</item>
+        <item>What level of bias might be present (selection, performance, detection)?</item>
+    </end{itemize}>
     
-    <vspace 0.5cm>
+    <vspace{0.5cm}>
     \textbf{Cohort Study Questions:} \\
     \textit{For cohort studies, consider the following:}
-    <begin itemize>
-        <item Were the participants in both the exposed and unexposed groups similar at the start?>
-        <item How was the exposure measured, and was it objective?>
-        <item Was follow-up sufficiently long and complete?>
-        <item Were confounding variables controlled for adequately?>
-    </end itemize>
+    <begin{itemize}>
+        <item>Were the participants in both the exposed and unexposed groups similar at the start?</item>
+        <item>How was the exposure measured, and was it objective?</item>
+        <item>Was follow-up sufficiently long and complete?</item>
+        <item>Were confounding variables controlled for adequately?</item>
+    </end{itemize}>
     
-    <vspace 0.5cm>
+    <vspace{0.5cm}>
     \textbf{Case-Control Study Questions:} \\
     \textit{For case-control studies, think about:}
-    <begin itemize>
-        <item How were cases and controls selected, and were they comparable?>
-        <item Was recall bias a concern in how exposure was measured?>
-        <item Were confounders considered and controlled?>
-    </end itemize>
-</div>
-    <div class="card-back">
-      <div class="prompt-text">
-I am running an experiment on a clinicopathological case conference to see how your
-diagnoses compare with those of human experts. I am going to give you part of a medical case.
-These have all been published in the New England Journal of Medicine. You are not trying to
-treat any patients. As you read the case, you will notice that there are expert discussants giving
-their thoughts. In this case, you are "Dr. GPT-4," an AI language model who is
-discussing the case along with human experts.
-A clinicopathological case conference has several unspoken rules. The first is that there is most
-often a single definitive diagnosis (though rarely there may be more than one), and it is a
-diagnosis that is known today to exist in humans. The diagnosis is almost always confirmed by
-some sort of clinical pathology test or anatomic pathology test, though in rare cases when such
-a test does not exist for a diagnosis the diagnosis can instead be made using validated clinical
-criteria or very rarely just confirmed by expert opinion. You will be told at the end of the case
-description whether a diagnostic test/tests are being ordered, which you can assume will make
-the diagnosis/diagnoses.
-After you read the case, I want you to give two pieces of information.
-The first piece of information is your most likely diagnosis/diagnoses. You need to be as specific
-as possible -- the goal is to get the correct answer, not a broad category of answers. You do not
-need to explain your reasoning, just give the diagnosis/diagnoses.
-The second piece of information is to give a robust differential diagnosis, ranked by their
-probability so that the most likely diagnosis is at the top, and the least likely is at the bottom.
-There is no limit to the number of diagnoses on your differential. You can give as many
-diagnoses as you think are reasonable. You do not need to explain your reasoning, just list the
-diagnoses. Again, the goal is to be as specific as possible with each of the diagnoses.
-Do you have any questions, Dr. GPT?
-Here is the case:
+    <begin{itemize}>
+        <item>How were cases and controls selected, and were they comparable?</item>
+        <item>Was recall bias a concern in how exposure was measured?</item>
+        <item>Were confounders considered and controlled?</item>
+    </end{itemize}>
+</end{tcolorbox>
+      </div>
+      <div class="card-footer">
+        <button class="copy-button">Copy</button>
+        <button class="back-button">Back</button>
       </div>
     </div>
+  </div>
 </div>
