@@ -130,3 +130,32 @@ The output is expected in paragraph form, but split by situation (interactive sm
     </div>
   </div>
 </div>
+
+<div class="card" aria-expanded="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <h3>Simulation Case: Septic Shock</h3>
+      <p>Builds a simulation scenario on sepsis with scripted decision points.</p>
+      <button class="reveal-button">Reveal Prompt</button>
+    </div>
+    <div class="card-back">
+      <div class="prompt-text" style="margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
+Create a high-fidelity simulation scenario of an elderly patient presenting with septic shock. Include patient HPI, vitals over time, labs, nursing prompts, and 3 decision points for learners with branching outcomes. Add debriefing topics.
+
+---
+**Use Case:** Simulation Scenario  
+**Learner Level:** Intern  
+**Output Format:** Scenario JSON with time-based vitals, triggers, and debrief guide  
+**Constraints:** Highlight early sepsis recognition, Include lactate, blood culture, fluid order triggers  
+**Tags:** simulation, sepsis, intern, patient safety  
+**Rubric:** Clinical Simulation Standards
+
+**Variation Request:** Add a surprise complication (e.g., new onset Afib).
+      </div>
+      <div class="card-footer">
+        <button class="copy-button">Copy</button>
+        <button class="back-button">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
