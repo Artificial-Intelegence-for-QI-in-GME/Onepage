@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ChatGPT Prompts for UME/GME Medical Education</title>
+  <title>Simple MedEd Prompts</title>
   <base href="./">
   <link rel="stylesheet" href="onepagerstyle.css" />
 </head>
 <body>
   <header>
     <div class="header-img"></div>
-    <h1 style="display:inline">LLM Prompts for UME/GME Medical Education</h1>
+    <h1 style="display:inline">Simple MedEd Prompts</h1>
   </header>
-  <div class="banner">Scroll below to explore structured, specialty-aligned prompts designed for medical education excellence <a href="Meded.html">Simple MedEd Prompts</a></div>
+  <div class="banner">Scroll below to explore structured, specialty-aligned prompts designed for medical education excellence</div>
   <div class="filter">
     <input id="search-input" type="search" placeholder="Filter prompts..." aria-label="Filter prompts" />
     <span style="margin-left:1rem; font-size:0.95em;">
@@ -24,8 +24,7 @@
       <a href="https://notebooklm.google.com/" target="_blank" rel="noopener" style="margin-right:0.5em;">NotebookLM</a>|
       <a href="https://draw.io/" target="_blank" rel="noopener" style="margin-right:0.5em;">draw.io</a>|
       <a href="https://platform.openai.com/playground/" target="_blank" rel="noopener" style="margin-right:0.5em;">OpenAI Playground</a>|
-      <a href="https://console.anthropic.com/dashboard" target="_blank" rel="noopener">Anthropic Console</a>|
-      <a href="https://huggingface.co/tasks/text-generation" target="_blank" rel="noopener" style="margin-left:0.5em;">HuggingFace Text Generation</a>
+      <a href="https://console.anthropic.com/dashboard" target="_blank" rel="noopener">Anthropic Console</a>
     </span>
   </div>
   <main class="container" id="cards-container"></main>
@@ -60,28 +59,13 @@
 
       // List all your card files here
       const cardFiles = [
-        './cards/email-writing.html',
-        './cards/illness-scripts.html',
-        './cards/management-script.html',
-        './cards/evaluation-feedback.html',
-        './cards/management.html',
-        './cards/data-analysis.html',
-        './cards/question-generation.html',
-        './cards/diagnostic-reasoning.html',
-        './cards/case-presentation.html',
-        './cards/assessment-plan.html',
-        './cards/differential-diagnosis.html',
-        './cards/social-determinants.html',
-        './cards/sign-out.html',
-        './cards/simulation.html',
-        './cards/in-basket.html',
-        './cards/general-learning-points.html',
-        './cards/literature-review-latex.html',
-        './cards/ddx.html',
-        './cards/gemini-app-builder.html', 
-         './cards/decision-dynamo.html',
-         
-           ];
+        './cards/professionalism-feedback-rime.html', // 1. Professionalism
+        './cards/milestone-based-resident-evaluation.html', // 2. Milestone
+        './cards/simulation.html', // 3. Simulation
+        './cards/chalk-talk.html', // 4. Chalk Talk
+        './cards/mid-rotation-check-in.html', // 5. Mid-Rotation Check-In
+        // ...add more cards here in desired order...
+      ];
 
       const container = document.getElementById('cards-container');
       container.style.display = 'grid';
