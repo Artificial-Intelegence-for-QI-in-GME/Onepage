@@ -1,0 +1,49 @@
+<div class="card" aria-expanded="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <h3>Enhanced Strong Prompt - Slide 311</h3>
+      <p>Comprehensive version: Get help with an Excel formula to calculate a 12-month rolling average of CLABSI rates.</p>
+      <button class="reveal-button">Reveal Prompt</button>
+    </div>
+    <div class="card-back">
+      <div class="prompt-text" style="margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
+As a healthcare data analyst with expertise in statistical process control and experience with healthcare-associated infection surveillance, help create a comprehensive Excel solution for 12-month rolling average CLABSI rate calculations.
+
+**Step-by-Step Approach:**
+1. **Initial Setup**: Start in cell C13 (first cell where 12 months of data are available)
+2. **Core Formula**: `=AVERAGE(B2:B13)` for the first calculation, then `=AVERAGE(OFFSET(B2,ROW()-13,0,12,1))` for dynamic copying
+3. **Validation &amp; Testing**: Verify calculations match manual averages for first few rows
+4. **Healthcare-Specific Considerations**: Account for months with zero denominator and seasonal variations
+
+**Technical Requirements:**
+- Handle edge cases: Zero patient-days (display as N/A or blank)
+- Error handling: `=IF(COUNT(OFFSET(B2,ROW()-13,0,12,1))&lt;12,"Insufficient Data",AVERAGE(OFFSET(B2,ROW()-13,0,12,1)))`
+- Data validation: Flag unusual spikes (&gt;2 standard deviations from mean)
+- Documentation: Include column headers and calculation notes for audit purposes
+
+**Run Chart Creation (Statistical Process Control)**:
+1. Select data range (months and rolling averages)
+2. Insert Line Chart → Select data series
+3. Calculate median: `=MEDIAN(C13:C50)` 
+4. Add horizontal reference line at median value
+5. Format chart with healthcare reporting standards (clear axes, appropriate scale)
+
+**Deliverables:**
+- Dynamic Excel formula that updates automatically as new data is added
+- Step-by-step instructions for replication across different infection types
+- Run chart template with median line and control limit calculations
+- Sample calculation using realistic CLABSI data (e.g., 1.2, 0.8, 1.5 per 1000 patient-days)
+
+**Quality Assurance:**
+- Verify accuracy by comparing automated formula results with manual calculations
+- Test with edge cases (missing data, zero denominators, extreme values)
+- Ensure results align with NHSN calculation methodology and CDC surveillance definitions
+- Validate that rolling average smooths monthly variation while preserving trend detection
+      </div>
+      <div class="card-footer">
+        <button class="copy-button">Copy</button>
+        <button class="back-button">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

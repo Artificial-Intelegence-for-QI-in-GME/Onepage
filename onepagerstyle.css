@@ -13,7 +13,7 @@ header {
 .header-img {
   width: 60px;
   height: 60px;
-  background-image: url('Headshot.jpeg');
+  background-image: url('download.jpeg');
   background-size: cover;
   background-position: center;
   border: 2px solid white;
@@ -21,6 +21,16 @@ header {
   display: inline-block;
   vertical-align: middle;
   margin-right: 1rem;
+}
+
+/* Personal headshot for main pages */
+.header-img.headshot {
+  background-image: url('Headshot.jpeg');
+}
+
+/* IHI logo for IHI-specific pages */
+.header-img.ihi-logo {
+  background-image: url('download.jpeg');
 }
 .container {
   display: flex;
