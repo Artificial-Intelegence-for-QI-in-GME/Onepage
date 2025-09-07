@@ -1,0 +1,78 @@
+Filename,Title,Category,Priority,Current_Quality,Notes
+slide-311-get-help-with-an-excel-formula-to-calculate-a-12-m.html,Get help with Excel formula to calculate 12-month rolling average,A,High,2,Generic QI template for Excel formula
+slide-311-get-help-with-an-excel-formula-to-calculate-a-12mo.html,Get help with Excel formula to calculate 12-month average,A,High,2,Duplicate of above
+slide-332-create-a-driver-diagram-for-reducing-hospital-acqu.html,Create driver diagram for reducing hospital-acquired pressure injuries,D,Medium,6,Already appropriate for comprehensive framework
+slide-332-build-a-driver-diagram-for-a-quality-improvement-t.html,Build driver diagram for quality improvement,D,Medium,6,Appropriate complexity level
+slide-332-create-a-driver-diagram-for-reducing-hospitalacqui.html,Create driver diagram for reducing hospital-acquired infections,D,Medium,6,Duplicate content
+slide-293-a-strong-prompt-for-setting-an-ais-persona-as-a-qi.html,Setting an AI's persona as a QI professional,B,Medium,4,Communication/persona setting task
+slide-299-summarize-a-meeting.html,Summarize a meeting,B,High,2,Simple task with generic framework
+slide-308-summarise-a-team-meeting-from-raw-notes-or-a-trans.html,Summarize team meeting from notes or transcript,B,High,2,Generic template for meeting summary
+slide-309-summarise-multiple-safety-incident-reports-for-a-w.html,Summarize multiple safety incident reports for weekly review,E,Medium,4,Safety task needs clinical accuracy
+slide-310-draft-emails-to-give-units-feedback-on-their-safet.html,Draft emails to give units feedback on safety performance,B,High,2,Communication task with generic framework
+slide-315-brainstorm-creative-ideas-for-a-hand-hygiene-campa.html,Brainstorm creative ideas for hand hygiene campaign,D,Medium,5,Planning task but could be enhanced
+slide-318-write-a-simple-clear-explanation-of-a-near-miss-fo.html,Write simple explanation of near miss for family,B,High,2,Patient communication with generic template
+slide-320-develop-pdsa-ideas-to-generate-small-tests-of-chan.html,Develop PDSA ideas to generate small tests of change,D,Medium,6,Appropriate for comprehensive framework
+slide-323-prepare-for-an-accreditation-visit-by-reviewing-th.html,Prepare for accreditation visit by reviewing policies,E,Medium,5,Clinical/regulatory task
+slide-327-create-a-cause-and-effect-fishbone-diagram-to-iden.html,Create cause-and-effect fishbone diagram,C,Medium,5,Analysis tool creation
+slide-340-create-a-pdsa-worksheet-to-test-hourly-rounding-fo.html,Create PDSA worksheet to test hourly rounding,D,Medium,6,Planning task with good framework fit
+slide-347-create-a-run-chart-to-monitor-patient-falls-per-10.html,Create run chart to monitor patient falls,A,High,3,Data visualization with generic template
+slide-351-use-nlp-to-analyze-free-text-patient-survey-commen.html,Use NLP to analyze patient survey comments,A,Medium,4,Technical analysis task
+slide-351-use-nlp-to-analyze-freetext-patient-survey-comment.html,Use NLP to analyze freetext patient survey comments,A,Medium,4,Duplicate of above
+slide-355-act-as-an-assistant-qi-coach-to-help-a-team-reflec.html,Act as assistant QI coach to help team reflect,B,Medium,5,Communication/coaching task
+slide-358-refining-a-driver-diagram-by-reviewing-a-draft-and.html,Refining driver diagram by reviewing draft,D,Medium,6,Planning task with appropriate complexity
+slide-358-reviewing-a-draft-pdsa-plan-to-point-out-missing-e.html,Reviewing draft PDSA plan to point out missing elements,D,Medium,6,Planning review task
+slide-359-preparing-for-a-coaching-session-by-generating-coa.html,Preparing for coaching session by generating coaching questions,B,Medium,5,Communication/coaching preparation
+slide-359-summarising-and-framing-lessons-learned-from-a-pds.html,Summarizing and framing lessons learned from PDSA,D,Medium,6,Planning/analysis hybrid
+slide-369-general-example-of-building-a-driver-diagram.html,General example of building driver diagram,D,Medium,6,Planning task with good framework
+slide-376-conduct-a-failure-modes-and-effects-analysis-fmea-.html,Conduct failure modes and effects analysis (FMEA),C,Medium,5,Analysis methodology task
+slide-388-map-and-improve-a-clinical-process-such-as-patient.html,Map and improve clinical process,D,Medium,6,Process improvement planning
+slide-399-create-a-pareto-chart-from-a-dataset-with-categori.html,Create Pareto chart from dataset,A,High,3,Data visualization with generic template
+slide-403-create-a-project-planning-form-for-a-qi-project-li.html,Create project planning form for QI project,D,Medium,6,Planning tool creation
+slide-408-generate-a-run-chart-from-data-applying-and-annota.html,Generate run chart from data with annotations,A,High,3,Data visualization task
+slide-413-use-a-scatter-diagram-to-explore-the-relationship-.html,Use scatter diagram to explore relationships,A,Medium,4,Data analysis/visualization
+slide-DSPy-001-dspy-a3-thinking-tool-a3thinkingsignature.html,DSPy A3 Thinking Tool,C,High,2,Analysis tool with generic template
+slide-DSPy-002-dspy-adoption-curves-tool-adoptioncurvessignature.html,DSPy Adoption Curves Tool,C,Medium,3,Analysis/modeling tool
+slide-DSPy-003-dspy-aim-statements-tool-aimstatementssignature.html,DSPy Aim Statements Tool,D,Medium,4,Planning tool for aim statements
+slide-DSPy-004-dspy-balanced-scorecards-tool-balancedscorecardssi.html,DSPy Balanced Scorecards Tool,C,Medium,4,Analysis/measurement tool
+slide-DSPy-005-dspy-benchmarking-tool-benchmarkingsignature.html,DSPy Benchmarking Tool,C,Medium,4,Comparative analysis tool
+slide-DSPy-006-dspy-box-plots-tool-boxplotssignature.html,DSPy Box Plots Tool,A,High,2,Data visualization with generic template
+slide-DSPy-007-dspy-brainstorming-tool-brainstormingsignature.html,DSPy Brainstorming Tool,D,Medium,4,Ideation/planning tool
+slide-DSPy-008-dspy-communication-plans-tool-communicationplanssi.html,DSPy Communication Plans Tool,B,Medium,4,Communication planning task
+slide-DSPy-009-dspy-control-charts-tool-controlchartssignature.html,DSPy Control Charts Tool,A,High,2,Statistical process control visualization
+slide-DSPy-010-dspy-cost-benefit-analysis-tool-costbenefitanalysi.html,DSPy Cost-Benefit Analysis Tool,C,Medium,5,Financial analysis tool
+slide-DSPy-011-dspy-customer-journey-mapping-tool-customerjourney.html,DSPy Customer Journey Mapping Tool,D,Medium,4,Process mapping/planning
+slide-DSPy-012-dspy-decision-matrices-tool-decisionmatricessignat.html,DSPy Decision Matrices Tool,C,Medium,4,Decision analysis tool
+slide-DSPy-013-dspy-driver-diagrams-tool-driverdiagramssignature.html,DSPy Driver Diagrams Tool,D,Medium,6,Already appropriate framework
+slide-DSPy-014-dspy-executive-summaries-tool-executivesummariessi.html,DSPy Executive Summaries Tool,B,Medium,4,Communication/reporting task
+slide-DSPy-015-dspy-five-whys-tool-fivewhyssignature.html,DSPy Five Whys Tool,C,Medium,4,Root cause analysis tool
+slide-DSPy-016-dspy-fmea-tool-fmeasignature.html,DSPy FMEA Tool,C,Medium,5,Risk analysis methodology
+slide-DSPy-017-dspy-force-field-analysis-tool-forcefieldanalysiss.html,DSPy Force Field Analysis Tool,C,Medium,4,Change analysis tool
+slide-DSPy-018-dspy-gantt-charts-tool-ganttchartssignature.html,DSPy Gantt Charts Tool,A,High,2,Project scheduling visualization
+slide-DSPy-019-dspy-histograms-tool-histogramssignature.html,DSPy Histograms Tool,A,High,2,Data visualization tool
+slide-DSPy-020-dspy-impact-effort-grids-tool-impacteffortgridssig.html,DSPy Impact-Effort Grids Tool,C,Medium,4,Prioritization analysis tool
+slide-DSPy-021-dspy-implementation-checklists-tool-implementation.html,DSPy Implementation Checklists Tool,D,Medium,5,Implementation planning
+slide-DSPy-022-dspy-ishikawa-diagrams-tool-ishikawadiagramssignat.html,DSPy Ishikawa Diagrams Tool,C,Medium,4,Cause analysis visualization
+slide-DSPy-023-dspy-kano-model-tool-kanomodelsignature.html,DSPy Kano Model Tool,C,Medium,4,Customer satisfaction analysis
+slide-DSPy-024-dspy-logic-models-tool-logicmodelssignature.html,DSPy Logic Models Tool,D,Medium,5,Program planning framework
+slide-DSPy-025-dspy-lotus-blossom-tool-lotusblossomsignature.html,DSPy Lotus Blossom Tool,D,Medium,4,Creative planning technique
+slide-DSPy-026-dspy-memory-parsing-tool-memoryparsingsignature.html,DSPy Memory Parsing Tool,A,Medium,3,Technical data processing
+slide-DSPy-027-dspy-narrative-writeups-tool-narrativewriteupssign.html,DSPy Narrative Writeups Tool,B,Medium,4,Documentation/communication
+slide-DSPy-028-dspy-pareto-charts-tool-paretochartssignature.html,DSPy Pareto Charts Tool,A,High,2,Data visualization with generic template
+slide-DSPy-029-dspy-pdsa-templates-tool-pdsatemplatessignature.html,DSPy PDSA Templates Tool,D,Medium,6,Improvement cycle planning
+slide-DSPy-030-dspy-prioritization-matrices-tool-prioritizationma.html,DSPy Prioritization Matrices Tool,C,Medium,4,Decision support analysis
+slide-DSPy-031-dspy-problem-definition-tool-problemdefinitionsign.html,DSPy Problem Definition Tool,C,Medium,4,Problem analysis framework
+slide-DSPy-032-dspy-qi-playbooks-tool-qiplaybookssignature.html,DSPy QI Playbooks Tool,D,Medium,6,Quality improvement planning
+slide-DSPy-033-dspy-raci-matrices-tool-racimatricessignature.html,DSPy RACI Matrices Tool,D,Medium,5,Project role planning
+slide-DSPy-034-dspy-regression-analysis-tool-regressionanalysissi.html,DSPy Regression Analysis Tool,A,Medium,3,Statistical analysis tool
+slide-DSPy-035-dspy-residency-posters-tool-residencyposterssignat.html,DSPy Residency Posters Tool,B,Medium,4,Academic communication
+slide-DSPy-036-dspy-root-cause-analysis-tool-rootcauseanalysissig.html,DSPy Root Cause Analysis Tool,C,Medium,5,Problem investigation methodology
+slide-DSPy-037-dspy-run-charts-tool-runchartssignature.html,DSPy Run Charts Tool,A,High,2,Time series data visualization
+slide-DSPy-038-dspy-scamper-tool-scampersignature.html,DSPy SCAMPER Tool,D,Medium,4,Creative problem solving
+slide-DSPy-039-dspy-scatter-plots-tool-scatterplotssignature.html,DSPy Scatter Plots Tool,A,High,2,Data visualization analysis
+slide-DSPy-040-dspy-stakeholder-mapping-tool-stakeholdermappingsi.html,DSPy Stakeholder Mapping Tool,D,Medium,5,Stakeholder analysis planning
+slide-DSPy-041-dspy-sustainability-matrices-tool-sustainabilityma.html,DSPy Sustainability Matrices Tool,D,Medium,5,Long-term planning analysis
+slide-DSPy-042-dspy-swot-analysis-tool-swotanalysissignature.html,DSPy SWOT Analysis Tool,C,Medium,4,Strategic analysis framework
+slide-DSPy-043-dspy-time-series-analysis-tool-timeseriesanalysiss.html,DSPy Time Series Analysis Tool,A,Medium,3,Statistical data analysis
+slide-DSPy-044-dspy-triz-tool-trizsignature.html,DSPy TRIZ Tool,D,Medium,4,Systematic innovation methodology
+slide-DSPy-045-dspy-value-stream-mapping-tool-valuestreammappings.html,DSPy Value Stream Mapping Tool,D,Medium,5,Process improvement mapping
+slide-DSPy-046-dspy-voice-of-customer-tool-voiceofcustomersignatu.html,DSPy Voice of Customer Tool,C,Medium,4,Customer feedback analysis

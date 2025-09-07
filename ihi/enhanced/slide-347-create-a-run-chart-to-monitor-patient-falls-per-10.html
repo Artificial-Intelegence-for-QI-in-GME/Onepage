@@ -7,69 +7,110 @@
     </div>
     <div class="card-back">
       <div class="prompt-text" style="margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
-**Advanced Healthcare Run Chart Development and Analysis**
+You are an expert Healthcare Quality Improvement Analyst specializing in patient safety metrics and IHI run chart methodology. Your expertise includes statistical process control, falls prevention programs, and NDNQI benchmarking.
 
-**Clinical Context &amp; Regulatory Alignment:**
-- Compliance with CMS quality reporting requirements
-- Integration with Joint Commission performance improvement standards
-- Alignment with AHRQ safety measurement frameworks
-- Evidence-based indicator selection from clinical literature
+## TASK: Create a comprehensive run chart for patient falls monitoring
 
-**IHI Run Chart Methodology:**
-- Statistical process control principles with median line analysis
-- IHI run chart rules application (shifts, trends, runs, astronomical points)
-- Time series analysis with appropriate data points (minimum 10-12 points)
-- Annotation of interventions and special causes for contextual understanding
+### PHASE 1: Data Preparation
+Calculate the falls rate using this exact formula for each time period:
+```
+Falls Rate = (Total Falls ÷ Patient Days) × 1,000
+```
 
-**Comprehensive Run Chart Development:**
+Required data structure:
+- Month/Period | Total Falls | Patient Days | Falls Rate | Interventions
 
-**1. Data Foundation &amp; Clinical Validity:**
-- **Indicator Selection:** Evidence-based measures with clinical significance
-- **Data Quality:** Accurate, complete, and timely data collection protocols
-- **Population Definition:** Clear numerator&#x2F;denominator with inclusion criteria
-- **Baseline Period:** Sufficient historical data for trend establishment
+Example calculation:
+- January: 5 falls ÷ 1,523 patient days × 1,000 = 3.28 falls/1,000 patient days
 
-**2. Technical Construction:**
-- **Time Series Setup:** Appropriate time intervals (daily, weekly, monthly)
-- **Median Line Calculation:** Center line based on baseline data
-- **Scale Optimization:** Y-axis scaling for trend visibility
-- **Data Point Plotting:** Accurate chronological data representation
+### PHASE 2: Run Chart Construction
 
-**3. IHI Run Chart Rules Application:**
-- **Rule 1 - Shift:** 6+ consecutive points above or below median
-- **Rule 2 - Trend:** 5+ consecutive points increasing or decreasing
-- **Rule 3 - Runs:** Unusual patterns in runs above&#x2F;below median
-- **Rule 4 - Astronomical:** Points significantly outside normal variation
+Follow this step-by-step process:
 
-**4. Clinical Interpretation Framework:**
-- **Special Cause Identification:** Attribution of unusual variation to specific events
-- **Common Cause Analysis:** Understanding baseline system performance
-- **Intervention Impact:** Clear annotation of improvement initiatives
-- **Clinical Significance:** Translation of statistical changes to patient outcomes
+1. **Plot Setup**
+   - X-axis: Time periods (minimum 12 data points)
+   - Y-axis: Falls per 1,000 patient days
+   - Title: "Patient Falls Rate per 1,000 Patient Days - [Unit Name]"
 
-**5. Healthcare-Specific Considerations:**
-- **Seasonal Variation:** Accounting for predictable healthcare patterns
-- **Case Mix Adjustment:** Risk adjustment for patient acuity changes
-- **Workflow Integration:** Alignment with clinical and administrative processes
-- **Staff Education:** Training on interpretation and response protocols
+2. **Calculate Median Line**
+   - Use baseline period (first 8-12 points pre-intervention)
+   - Median = middle value when rates are sorted
+   - Draw horizontal line across entire chart
 
-**Implementation Requirements:**
-- **Data Collection Systems:** Automated data capture when possible
-- **Quality Assurance:** Regular data validation and accuracy checks
-- **Reporting Framework:** Regular distribution to stakeholders
-- **Action Protocols:** Clear response procedures for special cause variation
+3. **Add Data Points**
+   - Connect consecutive points with lines
+   - Mark intervention points with vertical annotations
+   - Label each intervention clearly (e.g., "Hourly rounding started")
 
-**Advanced Analysis Techniques:**
-- **Multiple Measures:** Related indicator tracking for comprehensive view
-- **Benchmarking:** Comparison to national and peer organization data
-- **Predictive Analysis:** Trend projection and early warning systems
-- **Root Cause Integration:** Connection to failure mode analysis and improvement initiatives
+### PHASE 3: Apply IHI Run Chart Rules
 
-**Sustainability and Continuous Improvement:**
-- **Regular Review Cycles:** Periodic assessment of measure relevance
-- **System Integration:** EMR and quality management system connectivity
-- **Staff Competency:** Ongoing education on statistical thinking
-- **Leadership Engagement:** Regular review and action planning sessions
+Systematically check each rule:
+
+**Rule 1 - SHIFT** (Special Cause)
+✓ Check: 6+ consecutive points all above or all below median
+→ Action: Recalculate median after confirmed shift
+Example: Points 7-13 all below median = positive shift
+
+**Rule 2 - TREND** (Special Cause)
+✓ Check: 5+ consecutive points consistently increasing/decreasing
+→ Action: Investigate root cause of trend
+Example: Points 4-8 decreasing = improvement trend
+
+**Rule 3 - RUNS TEST** (Special Cause)
+✓ Check: Too few or too many line crossings
+→ Expected runs = (n+1)/2 ± 3√(n-1)/4 where n = total points
+Example: 20 points expect 11 ± 3 runs (8-14 acceptable range)
+
+**Rule 4 - ASTRONOMICAL POINT** (Special Cause)
+✓ Check: Point dramatically different from others
+→ Action: Investigate immediate cause
+Example: 8.5 rate when others range 2.5-4.0
+
+### PHASE 4: Interpretation &amp; Action
+
+Generate this structured analysis:
+
+**Performance Assessment:**
+- Current rate: [X.X] falls/1,000 patient days
+- Baseline median: [X.X] falls/1,000 patient days  
+- NDNQI benchmark: 3.3 falls/1,000 patient days
+- Performance level: [Above/At/Below benchmark]
+
+**Statistical Findings:**
+- Special cause variation detected: [Yes/No - specify which rules triggered]
+- Direction of change: [Improving/Stable/Deteriorating]
+- Sustainability assessment: [Shift maintained for X points]
+
+**Clinical Impact Translation:**
+- Actual falls prevented: [Calculate based on rate change × patient days]
+- Estimated injuries avoided: [Use 30% injury rate from falls]
+- Cost avoidance: [$4,500 average per fall with injury]
+
+**Recommended Next Steps:**
+Based on the patterns observed:
+- If improving shift → Standardize successful interventions
+- If no change → Test new interventions (suggest 2-3 evidence-based options)
+- If deteriorating → Immediate root cause analysis required
+
+### PHASE 5: Advanced Considerations
+
+Include if applicable:
+- **Seasonal adjustment**: Account for winter months (typically 15-20% higher falls)
+- **Risk stratification**: Separate high-risk units if mixed data
+- **Balancing measures**: Monitor restraint use, patient satisfaction
+- **Sustainability plan**: Monthly review schedule, accountability structure
+
+### OUTPUT FORMAT
+
+Provide:
+1. Completed run chart visualization (or detailed description for creation)
+2. Statistical analysis summary table
+3. Executive summary (3-5 bullet points)
+4. Specific PDSA cycle recommendation based on findings
+5. Python/R code for reproducibility (optional but recommended)
+
+---
+*Remember: Run charts detect patterns over time. They are not for comparing groups or establishing causation. For falls reduction, focus on sustainable system changes rather than temporary vigilance.*
       </div>
       <div class="card-footer">
         <button class="copy-button">Copy</button>

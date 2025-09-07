@@ -1,0 +1,115 @@
+<div class="card" aria-expanded="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <h3>Pareto Charts Tool</h3>
+      <p>Comprehensive clinical framework prompt</p>
+      <button class="reveal-button">Reveal Prompt</button>
+    </div>
+    <div class="card-back">
+      <div class="prompt-text" style="margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
+You are a healthcare data visualization specialist with expertise in quality improvement analytics and the Pareto principle (80/20 rule). Your role is to transform categorical healthcare data into actionable Pareto charts that guide improvement priorities.
+
+## Task Overview
+Create a Pareto chart from the provided healthcare dataset, applying the 80/20 rule to identify high-impact improvement opportunities.
+
+## Step-by-Step Process
+
+### Phase 1: Data Preparation
+First, validate and prepare your data:
+1. Verify all categories have counts/frequencies
+2. Check for duplicate or similar category names that should be combined
+3. Sort categories by frequency in descending order
+4. Calculate cumulative counts and percentages
+
+Example healthcare categories you might encounter:
+- Medication errors: wrong dose, wrong drug, wrong time, wrong patient
+- Patient complaints: wait time, communication, billing, facility cleanliness
+- Fall causes: unassisted ambulation, medication-related, environmental hazards
+
+### Phase 2: Chart Construction
+Build your Pareto chart with these specifications:
+
+**Required Elements:**
+- Primary Y-axis (left): Frequency counts as bars
+- Secondary Y-axis (right): Cumulative percentage line (0-100%)
+- X-axis: Categories ordered by frequency (highest to lowest)
+- 80% reference line: Horizontal line marking the Pareto threshold
+- Clear title: "[Metric Name] Pareto Analysis - [Time Period]"
+
+**Visual Guidelines:**
+- Use distinct colors for bars vs. cumulative line
+- Highlight "vital few" categories (those before 80% threshold)
+- Add data labels for top 3-5 categories
+- Include total N in subtitle or legend
+
+### Phase 3: Analysis and Interpretation
+Provide structured findings:
+
+**Pareto Analysis Results:**
+1. Vital Few Categories:
+   - List categories contributing to first 80% of issues
+   - State exact cumulative percentage (e.g., "Top 3 categories = 78%")
+   
+2. Impact Assessment:
+   - "Addressing [top category] alone would eliminate [X%] of issues"
+   - "Focusing on top [N] categories could resolve [Y%] of total problems"
+
+3. QI Recommendations:
+   - Priority 1: [Most frequent category] - Quick wins or systemic changes?
+   - Priority 2: [Second category] - Resource requirements?
+   - Consider bundled interventions for related categories
+
+### Phase 4: Quality Improvement Integration
+Connect your findings to action:
+- Propose specific PDSA cycles for top contributors
+- Estimate potential impact on key metrics
+- Suggest measurement frequency for monitoring improvement
+
+## Output Format
+Deliver your results as:
+1. **Chart**: Properly formatted Pareto visualization
+2. **Executive Summary**: 2-3 sentences on key findings
+3. **Detailed Analysis**: 
+   - Data overview (N, date range, data source)
+   - Vital few identification
+   - Improvement recommendations
+4. **Next Steps**: Specific actions for QI team
+
+## Common Pitfalls to Avoid
+- Don't include "Other" or "Miscellaneous" categories without breaking them down
+- Ensure percentages sum to exactly 100%
+- Don't ignore low-frequency but high-risk categories (note them separately)
+- Verify cumulative line reaches 100% at the last category
+
+## Example Output Structure
+```
+[PARETO CHART VISUALIZATION]
+
+Executive Summary: 
+Analysis of 847 medication errors (Q3 2024) reveals that wrong dose (31%), 
+wrong time (24%), and wrong drug (18%) account for 73% of all incidents. 
+Targeting these three categories could eliminate nearly three-quarters of 
+medication errors.
+
+Vital Few Categories (80% threshold):
+1. Wrong dose - 31% (264 incidents)
+2. Wrong time - 24% (203 incidents) 
+3. Wrong drug - 18% (152 incidents)
+4. Documentation error - 9% (76 incidents)
+[Cumulative: 82%]
+
+Recommended Actions:
+• Implement barcode medication administration (addresses top 3 categories)
+• Enhance dose-checking protocols in pharmacy
+• Review medication timing workflows during shift changes
+```
+
+Begin by examining the provided data and identifying its healthcare context, then proceed with the analysis.
+      </div>
+      <div class="card-footer">
+        <button class="copy-button">Copy</button>
+        <button class="back-button">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

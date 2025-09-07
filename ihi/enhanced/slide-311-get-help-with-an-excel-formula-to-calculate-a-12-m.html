@@ -7,38 +7,88 @@
     </div>
     <div class="card-back">
       <div class="prompt-text" style="margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
-As a healthcare data analyst with expertise in statistical process control and experience with healthcare-associated infection surveillance, help create a comprehensive Excel solution for 12-month rolling average CLABSI rate calculations.
+You are an Excel formula specialist with deep expertise in healthcare quality metrics and CDC/NHSN CLABSI rate calculations. Your task is to create a precise 12-month rolling CLABSI rate formula following IHI run chart methodology.
 
-**Step-by-Step Approach:**
-1. **Initial Setup**: Start in cell C13 (first cell where 12 months of data are available)
-2. **Core Formula**: `=AVERAGE(B2:B13)` for the first calculation, then `=AVERAGE(OFFSET(B2,ROW()-13,0,12,1))` for dynamic copying
-3. **Validation &amp; Testing**: Verify calculations match manual averages for first few rows
-4. **Healthcare-Specific Considerations**: Account for months with zero denominator and seasonal variations
+## Context &amp; Requirements
+- **Metric**: CLABSI rate per 1,000 central line days
+- **Formula**: (Number of CLABSIs ÷ Central Line Days) × 1,000
+- **Period**: 12-month rolling calculation
+- **Data location**: CLABSIs in column B, Central Line Days in column C, starting row 2
 
-**Technical Requirements:**
-- Handle edge cases: Zero patient-days (display as N/A or blank)
-- Error handling: `=IF(COUNT(OFFSET(B2,ROW()-13,0,12,1))&lt;12,"Insufficient Data",AVERAGE(OFFSET(B2,ROW()-13,0,12,1)))`
-- Data validation: Flag unusual spikes (&gt;2 standard deviations from mean)
-- Documentation: Include column headers and calculation notes for audit purposes
+## Step-by-Step Implementation
 
-**Run Chart Creation (Statistical Process Control)**:
-1. Select data range (months and rolling averages)
-2. Insert Line Chart → Select data series
-3. Calculate median: `=MEDIAN(C13:C50)` 
-4. Add horizontal reference line at median value
-5. Format chart with healthcare reporting standards (clear axes, appropriate scale)
+### Phase 1: Build Core Formula
+Think through the calculation logic:
+1. Sum 12 months of CLABSI events (numerator)
+2. Sum 12 months of central line days (denominator)
+3. Calculate rate per 1,000
+4. Handle edge cases
 
-**Deliverables:**
-- Dynamic Excel formula that updates automatically as new data is added
-- Step-by-step instructions for replication across different infection types
-- Run chart template with median line and control limit calculations
-- Sample calculation using realistic CLABSI data (e.g., 1.2, 0.8, 1.5 per 1000 patient-days)
+Provide this exact formula for cell D14:
+```excel
+=IFERROR(
+  IF(SUM(OFFSET(C2,ROW()-14,0,12,1))=0,
+     "No CL days",
+     (SUM(OFFSET(B2,ROW()-14,0,12,1))/SUM(OFFSET(C2,ROW()-14,0,12,1)))*1000),
+  "Check data")
+```
 
-**Quality Assurance:**
-- Verify accuracy by comparing automated formula results with manual calculations
-- Test with edge cases (missing data, zero denominators, extreme values)
-- Ensure results align with NHSN calculation methodology and CDC surveillance definitions
-- Validate that rolling average smooths monthly variation while preserving trend detection
+### Phase 2: Add Data Quality Checks
+Create validation formula for column E to flag issues:
+```excel
+=IF(COUNTBLANK(OFFSET(B2,ROW()-14,0,12,1))&gt;2,"Missing data",
+   IF(SUM(OFFSET(C2,ROW()-14,0,12,1))&lt;100,"Low volume","OK"))
+```
+
+### Phase 3: Generate Run Chart Elements
+Calculate these IHI-standard control elements:
+- Median line: `=MEDIAN(D14:D[current_row])`
+- Mean line: `=AVERAGE(D14:D[current_row])`
+- Signal detection: Flag if 6+ consecutive points above/below median
+
+### Example with Real Data
+Given this sample data:
+| Month | CLABSIs | CL Days | Rate | 12-Mo Roll |
+|-------|---------|---------|------|------------|
+| Jan-23| 2       | 1,850   | 1.08 | (wait)     |
+| Feb-23| 1       | 1,720   | 0.58 | (wait)     |
+| ...   | ...     | ...     | ...  | ...        |
+| Jan-24| 3       | 2,100   | 1.43 | 1.15       |
+
+The January 2024 rolling rate = (Sum of 12 months: 25 CLABSIs) ÷ (Sum of 12 months: 21,750 CL days) × 1,000 = 1.15
+
+### Progressive Complexity Options
+
+**BASIC** (Quick start):
+```excel
+=AVERAGE(OFFSET(D2,ROW()-14,0,12,1))
+```
+
+**INTERMEDIATE** (With proper rate calculation):
+```excel
+=(SUM(OFFSET(B2,ROW()-14,0,12,1))/SUM(OFFSET(C2,ROW()-14,0,12,1)))*1000
+```
+
+**ADVANCED** (Full error handling and validation):
+[Use the complete formula from Phase 1]
+
+### Troubleshooting Guide
+If you see:
+- "#DIV/0!" → Check for zero central line days
+- "#REF!" → Verify data range exists
+- "No CL days" → Expected when denominator is zero
+- Unexpected rates → Verify you're summing 12 months, not averaging monthly rates
+
+### Copy-Paste Instructions
+1. Place formula in row 14 (ensures 12 months of data)
+2. Copy down through your entire dataset
+3. Format cells as Number with 2 decimal places
+4. Add conditional formatting: Red if &gt;2.0, Green if &lt;1.0
+
+Would you like me to:
+A) Adjust for your specific data structure?
+B) Add NHSN risk adjustment calculations?
+C) Create a dynamic version that auto-updates monthly?
       </div>
       <div class="card-footer">
         <button class="copy-button">Copy</button>

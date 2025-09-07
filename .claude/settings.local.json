@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Read(//tmp/**)",
+      "Bash(git push:*)",
+      "WebSearch",
+      "Bash(for i in {041..046})",
+      "Bash(do find . -name \"slide-DSPy-$i-*\" -exec bash -c 'newname=$(echo \"\"$1\"\" | sed \"\"s/slide-DSPy-\\([0-9]*\\)-dspy-\\(.*\\)-tool-.*.html/slide-\\1-\\2-tool.html/\"\"); mv \"\"$1\"\" \"\"$newname\"\"' _ {} ;)",
+      "Bash(done)",
+      "Bash(chmod:*)",
+      "Bash(/Users/homefolder/Documents/02_GitHub/00_IHI_Onepage/clean-dspy.sh)",
+      "Bash(find:*)",
+      "Bash(python3:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:www.ahrq.gov)",
+      "mcp__brave_search__brave_web_search",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -16,3 +16,11 @@ _site/
 # counterproductive to check this file into the repository.
 # Details at https://github.com/github/pages-gem/issues/768
 Gemfile.lock
+
+# Files to ignore
+prototype-option4-scenarios.html
+prototype-option2-timeline.html
+prototype-option5-decision-tree.html
+raci-healthcare-research.md
+research.md
+"IHIPatientSafetyEssentialsToolkit copy.pdf"

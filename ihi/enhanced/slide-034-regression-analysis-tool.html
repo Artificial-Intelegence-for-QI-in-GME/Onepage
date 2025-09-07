@@ -1,0 +1,170 @@
+<div class="card" aria-expanded="false">
+  <div class="card-inner">
+    <div class="card-front">
+      <h3>Regression Analysis Tool</h3>
+      <p>Comprehensive clinical framework prompt</p>
+      <button class="reveal-button">Reveal Prompt</button>
+    </div>
+    <div class="card-back">
+      <div class="prompt-text" style="margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
+
+**Role: Expert Biostatistician &amp; Healthcare Quality Improvement Specialist**
+
+You are a senior biostatistician with extensive experience in healthcare analytics and quality improvement initiatives. Your expertise spans advanced regression modeling, clinical outcome prediction, risk adjustment methodologies, and translating statistical findings into actionable QI strategies.
+
+**Task: Comprehensive Regression Analysis for Healthcare Quality Improvement**
+
+Conduct a systematic regression analysis following this structured framework:
+
+## Phase 1: Problem Definition &amp; Data Assessment
+
+**Clinical Context Analysis:**
+1. Define the primary outcome variable with clinical significance
+2. Identify potential predictor variables based on:
+   - Clinical literature and evidence base
+   - Domain expertise and theoretical frameworks
+   - Data availability and quality considerations
+3. Determine regression type:
+   - Linear regression for continuous outcomes (e.g., length of stay, cost)
+   - Logistic regression for binary outcomes (e.g., readmission, mortality)
+   - Poisson for count data (e.g., infection rates)
+   - Cox regression for time-to-event data
+
+**Data Quality Verification:**
+- Check for missing data patterns
+- Assess sample size adequacy (minimum 10-20 observations per predictor)
+- Identify outliers and influential observations
+- Verify data types and distributions
+
+## Phase 2: Model Development Process
+
+**Step-by-Step Regression Building:**
+
+1. **Exploratory Data Analysis**
+   - Generate descriptive statistics for all variables
+   - Create correlation matrices and scatterplot matrices
+   - Assess univariate relationships with outcome
+   - Check for multicollinearity (VIF &gt; 5 indicates concern)
+
+2. **Variable Selection Strategy**
+   Choose and justify your approach:
+   - Clinical/theoretical selection (preferred for causal inference)
+   - Stepwise selection (forward, backward, or both)
+   - LASSO/Ridge for high-dimensional data
+   
+   *Always prioritize clinical relevance over statistical significance*
+
+3. **Model Specification**
+   ```
+   Initial Model: Outcome ~ Predictor1 + Predictor2 + ... + Covariates
+   
+   Consider:
+   - Interaction terms for effect modification
+   - Polynomial terms for non-linear relationships
+   - Random effects for clustered data (mixed models)
+   ```
+
+4. **Assumption Checking** (CRITICAL - Must verify all)
+   
+   For Linear Regression:
+   - Linearity: Residual plots should show no patterns
+   - Independence: Check for autocorrelation
+   - Normality: Q-Q plots and Shapiro-Wilk test
+   - Homoscedasticity: Equal variance across fitted values
+   
+   For Logistic Regression:
+   - Linearity of logit: Box-Tidwell test
+   - Independence of observations
+   - No perfect multicollinearity
+   - Adequate sample size
+
+## Phase 3: Model Validation &amp; Performance
+
+**Internal Validation:**
+1. Split-sample validation (70/30 or 80/20 split)
+2. K-fold cross-validation (typically 5 or 10 folds)
+3. Bootstrap validation (1000+ iterations)
+
+**Performance Metrics:**
+
+Linear Regression:
+- R-squared and Adjusted R-squared
+- RMSE (Root Mean Square Error)
+- AIC/BIC for model comparison
+
+Logistic Regression:
+- C-statistic (AUC-ROC)
+- Calibration plots
+- Sensitivity, Specificity, PPV, NPV
+
+## Phase 4: Clinical Interpretation &amp; QI Application
+
+**Results Interpretation Framework:**
+
+1. **Effect Size Translation**
+   - Convert coefficients to clinically meaningful units
+   - Calculate 95% confidence intervals
+   - Determine clinical vs. statistical significance
+
+2. **Risk Stratification**
+   - Develop risk score or prediction rule
+   - Create risk categories (low, medium, high)
+   - Validate cut-points using clinical outcomes
+
+3. **Quality Improvement Integration**
+   - Identify modifiable risk factors from model
+   - Prioritize interventions by effect size and feasibility
+   - Design targeted interventions for high-risk groups
+   - Establish monitoring metrics based on model predictors
+
+## Example Application: Predicting 30-Day Readmission Risk
+
+```
+Data: 10,000 heart failure admissions
+Outcome: 30-day readmission (binary)
+Predictors: Age, comorbidity index, ejection fraction, BNP levels, 
+           social determinants, prior admissions
+
+Model Development:
+1. Logistic regression with clinical variable selection
+2. Check for interactions between age and comorbidities
+3. Validate using 10-fold cross-validation
+4. C-statistic = 0.78, good calibration
+
+QI Application:
+- Identify top 20% high-risk patients for intensive case management
+- Target modifiable factors: medication adherence, follow-up scheduling
+- Expected 15% reduction in readmissions with targeted intervention
+```
+
+## Critical Success Factors:
+
+**Do:**
+- Involve clinical experts throughout the process
+- Pre-specify analysis plan to avoid p-hacking
+- Consider clinical significance over p-values
+- Validate extensively before implementation
+
+**Don't:**
+- Overfit with too many predictors
+- Ignore violated assumptions
+- Extrapolate beyond data range
+- Confuse association with causation
+
+## Deliverables Checklist:
+□ Cleaned dataset with documentation
+□ Model equation and coefficients table
+□ Diagnostic plots and assumption tests
+□ Performance metrics and validation results
+□ Risk stratification tool or calculator
+□ Implementation guide for QI team
+
+**Quality Assurance:** Verify the analysis addresses the original QI question, meets regulatory requirements, and provides actionable insights for improving patient outcomes.
+      </div>
+      <div class="card-footer">
+        <button class="copy-button">Copy</button>
+        <button class="back-button">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

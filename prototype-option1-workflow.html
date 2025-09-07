@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Option 1: IHI Model Workflow</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f8f9fa; }
+        
+        .workflow-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .workflow-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .workflow-progress {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .progress-step {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 20px;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-step.active {
+            background: #0066cc;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .progress-step.completed {
+            background: #28a745;
+            color: white;
+        }
+        
+        .progress-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e9ecef;
+            z-index: 1;
+        }
+        
+        .progress-line-fill {
+            height: 100%;
+            background: #28a745;
+            width: 40%; /* Adjust based on current progress */
+            transition: width 0.5s ease;
+        }
+        
+        .workflow-section {
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .section-header {
+            padding: 25px 30px;
+            background: linear-gradient(135deg, #0066cc, #004499);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .section-header h2 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-icon {
+            font-size: 24px;
+        }
+        
+        .section-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .section-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        /* Modal Styles */
+        .tool-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .tool-modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 95%;
+            max-width: 1000px;
+            max-height: 95vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+            z-index: 1001;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .modal-close:hover {
+            color: #333;
+            transform: scale(1.1);
+        }
+        
+        .tool-modal .card {
+            margin: 0;
+            border: none;
+            border-radius: 12px;
+            box-shadow: none;
+            perspective: 1000px;
+            width: 100%;
+            height: auto;
+            min-height: 500px;
+        }
+        
+        .tool-modal .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .tool-modal .card[aria-expanded="true"] .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .tool-modal .card-front,
+        .tool-modal .card-back {
+            position: absolute;
+            width: 100%;
+            min-height: 400px;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .tool-modal .card-front {
+            background: linear-gradient(135deg, #0066cc, #004499);
+            color: white;
+            padding: 40px;
+        }
+        
+        .tool-modal .card-back {
+            background: white;
+            color: #333;
+            transform: rotateY(180deg);
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-modal .card-header {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 20px 70px 20px 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 15px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            flex-shrink: 0;
+        }
+        
+        .tool-modal .card-header button {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-modal .card-header button:hover {
+            background: #0066cc;
+            color: white;
+            border-color: #0066cc;
+        }
+        
+        .tool-modal .prompt-text {
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: calc(95vh - 200px);
+            text-align: left;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .tool-modal .card-footer {
+            display: none; /* Hide original footer - buttons moved to header */
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0066cc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .workflow-section.active .section-content {
+            max-height: 1000px;
+            padding: 30px;
+        }
+        
+        .section-intro {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: -30px -30px 20px -30px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .tool-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            background: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tool-card:hover {
+            border-color: #0066cc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,102,204,0.15);
+        }
+        
+        .tool-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .tool-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .collapse-indicator {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        
+        .workflow-section.active .collapse-indicator {
+            transform: rotate(180deg);
+        }
+        
+        .next-section-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+        
+        .next-section-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="workflow-container">
+        <div class="workflow-header">
+            <h1>IHI Model for Improvement Workflow</h1>
+            <p>Follow the systematic approach to healthcare quality improvement</p>
+            
+            <div class="workflow-progress">
+                <div class="progress-line">
+                    <div class="progress-line-fill"></div>
+                </div>
+                <div class="progress-step completed" data-step="1">1</div>
+                <div class="progress-step active" data-step="2">2</div>
+                <div class="progress-step" data-step="3">3</div>
+                <div class="progress-step" data-step="4">4</div>
+                <div class="progress-step" data-step="5">5</div>
+            </div>
+        </div>
+
+        <div class="workflow-section completed" id="section1">
+            <div class="section-header" onclick="toggleSection('section1')">
+                <h2><span class="section-icon">🎯</span> Setting Aims</h2>
+                <div>
+                    <span class="section-badge">18 tools</span>
+                    <span class="collapse-indicator">▼</span>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="section-intro">
+                    <strong>Purpose:</strong> Define what you're trying to accomplish, for whom, and by when. Establish clear, measurable improvement aims that align with organizational priorities.
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="openTool('aim-statements')">
+                        <div class="tool-title">Aim Statements</div>
+                        <div class="tool-description">Create specific, measurable, achievable, relevant, and time-bound improvement goals</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('problem-definition')">
+                        <div class="tool-title">Problem Definition</div>
+                        <div class="tool-description">Clearly articulate the problem you're trying to solve with supporting data</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('stakeholder-mapping')">
+                        <div class="tool-title">Stakeholder Mapping</div>
+                        <div class="tool-description">Identify all parties affected by or involved in the improvement effort</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('voice-of-customer')">
+                        <div class="tool-title">Voice of Customer</div>
+                        <div class="tool-description">Gather and analyze customer feedback to inform improvement priorities</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('balanced-scorecards')">
+                        <div class="tool-title">Balanced Scorecards</div>
+                        <div class="tool-description">Develop comprehensive performance measurement framework</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('benchmarking')">
+                        <div class="tool-title">Benchmarking</div>
+                        <div class="tool-description">Compare performance against best practices and industry standards</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('logic-models')">
+                        <div class="tool-title">Logic Models</div>
+                        <div class="tool-description">Map relationships between resources, activities, and intended outcomes</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('customer-journey')">
+                        <div class="tool-title">Customer Journey Mapping</div>
+                        <div class="tool-description">Visualize the complete patient experience across all touchpoints</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-013-driver-diagrams-tool')">
+                        <div class="tool-title">Driver Diagrams</div>
+                        <div class="tool-description">Map relationships between aims, primary drivers, and specific changes</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-014-executive-summaries-tool')">
+                        <div class="tool-title">Executive Summaries</div>
+                        <div class="tool-description">Create compelling executive summaries for improvement initiatives</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-023-kano-model-tool')">
+                        <div class="tool-title">Kano Model</div>
+                        <div class="tool-description">Prioritize features and improvements based on customer satisfaction impact</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-008-communication-plans-tool')">
+                        <div class="tool-title">Communication Plans</div>
+                        <div class="tool-description">Develop comprehensive communication strategies for stakeholder engagement</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-027-narrative-writeups-tool')">
+                        <div class="tool-title">Narrative Writeups</div>
+                        <div class="tool-description">Create compelling narratives to support improvement initiatives</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-032-qi-playbooks-tool')">
+                        <div class="tool-title">QI Playbooks</div>
+                        <div class="tool-description">Access standardized approaches for quality improvement scenarios</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-403-create-a-project-planning-form-for-a-qi-project-li')">
+                        <div class="tool-title">Project Planning</div>
+                        <div class="tool-description">Create comprehensive project plans for quality improvement initiatives</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-026-memory-parsing-tool')">
+                        <div class="tool-title">Memory Parsing</div>
+                        <div class="tool-description">Extract and organize key information from complex documents</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-358-refining-a-driver-diagram-by-reviewing-a-draft-and')">
+                        <div class="tool-title">Driver Diagram Refinement</div>
+                        <div class="tool-description">Review and refine driver diagrams for improved clarity and impact</div>
+                    </div>
+                </div>
+                <button class="next-section-btn" onclick="activateSection('section2')">Complete Setting Aims → Move to Establishing Measures</button>
+            </div>
+        </div>
+
+        <div class="workflow-section active" id="section2">
+            <div class="section-header" onclick="toggleSection('section2')">
+                <h2><span class="section-icon">📊</span> Establishing Measures</h2>
+                <div>
+                    <span class="section-badge">15 tools</span>
+                    <span class="collapse-indicator">▼</span>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="section-intro">
+                    <strong>Purpose:</strong> Determine how you will know that a change is an improvement. Select and implement measurement systems to track progress toward your aims.
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="openTool('run-charts')">
+                        <div class="tool-title">Run Charts</div>
+                        <div class="tool-description">Track performance over time to identify trends and variation patterns</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('control-charts')">
+                        <div class="tool-title">Control Charts</div>
+                        <div class="tool-description">Distinguish between common and special cause variation in processes</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('pareto-charts')">
+                        <div class="tool-title">Pareto Charts</div>
+                        <div class="tool-description">Identify the most significant factors contributing to problems</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('histograms')">
+                        <div class="tool-title">Histograms</div>
+                        <div class="tool-description">Visualize distribution of continuous data to understand variation</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('scatter-plots')">
+                        <div class="tool-title">Scatter Plots</div>
+                        <div class="tool-description">Explore relationships between two variables</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('box-plots')">
+                        <div class="tool-title">Box Plots</div>
+                        <div class="tool-description">Compare distributions across different groups or time periods</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-043-time-series-analysis-tool')">
+                        <div class="tool-title">Time Series Analysis</div>
+                        <div class="tool-description">Analyze data patterns and trends over extended time periods</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-034-regression-analysis-tool')">
+                        <div class="tool-title">Regression Analysis</div>
+                        <div class="tool-description">Examine relationships between variables to predict outcomes</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-413-use-a-scatter-diagram-to-explore-the-relationship-')">
+                        <div class="tool-title">Scatter Plot Analysis</div>
+                        <div class="tool-description">Explore relationships between key performance indicators</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-347-create-a-run-chart-to-monitor-patient-falls-per-10')">
+                        <div class="tool-title">Patient Safety Run Charts</div>
+                        <div class="tool-description">Monitor patient safety indicators over time</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-399-create-a-pareto-chart-from-a-dataset-with-categori')">
+                        <div class="tool-title">Pareto Analysis</div>
+                        <div class="tool-description">Create Pareto charts from categorical data to identify priorities</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-408-generate-a-run-chart-from-data-applying-and-annota')">
+                        <div class="tool-title">Advanced Run Charts</div>
+                        <div class="tool-description">Generate annotated run charts with statistical analysis</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-311-get-help-with-an-excel-formula-to-calculate-a-12mo')">
+                        <div class="tool-title">Excel Formula Assistance</div>
+                        <div class="tool-description">Get help with complex Excel formulas for data analysis</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-351-use-nlp-to-analyze-freetext-patient-survey-comment')">
+                        <div class="tool-title">Patient Feedback Analysis</div>
+                        <div class="tool-description">Analyze free-text patient feedback using natural language processing</div>
+                    </div>
+                </div>
+                <button class="next-section-btn" onclick="activateSection('section3')">Complete Establishing Measures → Move to Selecting Changes</button>
+            </div>
+        </div>
+
+        <div class="workflow-section" id="section3">
+            <div class="section-header" onclick="toggleSection('section3')">
+                <h2><span class="section-icon">💡</span> Selecting Changes</h2>
+                <div>
+                    <span class="section-badge">20 tools</span>
+                    <span class="collapse-indicator">▼</span>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="section-intro">
+                    <strong>Purpose:</strong> Identify and select evidence-based changes that will result in improvement. Use data analysis and creative problem-solving to develop intervention strategies.
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="openTool('slide-036-root-cause-analysis-tool')">
+                        <div class="tool-title">Root Cause Analysis</div>
+                        <div class="tool-description">Systematically identify underlying causes of problems using structured analysis methods</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-015-five-whys-tool')">
+                        <div class="tool-title">Five Whys Analysis</div>
+                        <div class="tool-description">Simple yet powerful technique to explore cause-and-effect relationships</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-022-ishikawa-diagrams-tool')">
+                        <div class="tool-title">Ishikawa (Fishbone) Diagrams</div>
+                        <div class="tool-description">Visualize all potential causes of a problem in structured categories</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-016-fmea-tool')">
+                        <div class="tool-title">FMEA (Failure Mode Analysis)</div>
+                        <div class="tool-description">Proactive risk assessment to prevent potential failures before they occur</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-007-brainstorming-tool')">
+                        <div class="tool-title">Brainstorming</div>
+                        <div class="tool-description">Generate creative solutions through structured ideation sessions</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-038-scamper-tool')">
+                        <div class="tool-title">SCAMPER Technique</div>
+                        <div class="tool-description">Systematic approach to creative thinking and problem-solving</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-044-triz-tool')">
+                        <div class="tool-title">TRIZ Innovation</div>
+                        <div class="tool-description">Theory of inventive problem-solving for breakthrough solutions</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-025-lotus-blossom-tool')">
+                        <div class="tool-title">Lotus Blossom</div>
+                        <div class="tool-description">Expand thinking around core problems to generate comprehensive solutions</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-017-force-field-analysis-tool')">
+                        <div class="tool-title">Force Field Analysis</div>
+                        <div class="tool-description">Analyze driving and restraining forces affecting change implementation</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-012-decision-matrices-tool')">
+                        <div class="tool-title">Decision Matrices</div>
+                        <div class="tool-description">Systematic evaluation of multiple options using weighted criteria</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-030-prioritization-matrices-tool')">
+                        <div class="tool-title">Prioritization Matrices</div>
+                        <div class="tool-description">Rank and prioritize improvement opportunities based on impact and effort</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-020-impact-effort-grids-tool')">
+                        <div class="tool-title">Impact-Effort Grids</div>
+                        <div class="tool-description">Plot improvement ideas by implementation difficulty versus potential impact</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-010-cost-benefit-analysis-tool')">
+                        <div class="tool-title">Cost-Benefit Analysis</div>
+                        <div class="tool-description">Quantify financial and resource implications of proposed changes</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-045-value-stream-mapping-tool')">
+                        <div class="tool-title">Value Stream Mapping</div>
+                        <div class="tool-description">Visualize current and future state processes to identify improvement opportunities</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-001-a3-thinking-tool')">
+                        <div class="tool-title">A3 Thinking</div>
+                        <div class="tool-description">Structured problem-solving methodology on a single page</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-042-swot-analysis-tool')">
+                        <div class="tool-title">SWOT Analysis</div>
+                        <div class="tool-description">Evaluate strengths, weaknesses, opportunities, and threats</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-315-brainstorm-creative-ideas-for-a-hand-hygiene-campa')">
+                        <div class="tool-title">Creative Campaign Ideas</div>
+                        <div class="tool-description">Generate innovative approaches for quality improvement campaigns</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-327-create-a-cause-and-effect-fishbone-diagram-to-iden')">
+                        <div class="tool-title">Fishbone Analysis</div>
+                        <div class="tool-description">Create detailed cause-and-effect diagrams for problem analysis</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-332-create-a-driver-diagram-for-reducing-hospital-acqu')">
+                        <div class="tool-title">Driver Diagrams</div>
+                        <div class="tool-description">Map relationships between aims, primary drivers, and specific changes</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-388-map-and-improve-a-clinical-process-such-as-patient')">
+                        <div class="tool-title">Process Mapping</div>
+                        <div class="tool-description">Document and analyze clinical processes for improvement opportunities</div>
+                    </div>
+                </div>
+                <button class="next-section-btn" onclick="activateSection('section4')">Complete Selecting Changes → Move to Testing Changes</button>
+            </div>
+        </div>
+
+        <div class="workflow-section" id="section4">
+            <div class="section-header" onclick="toggleSection('section4')">
+                <h2><span class="section-icon">🧪</span> Testing Changes</h2>
+                <div>
+                    <span class="section-badge">14 tools</span>
+                    <span class="collapse-indicator">▼</span>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="section-intro">
+                    <strong>Purpose:</strong> Test changes on a small scale before full implementation. Use PDSA cycles and rapid testing methodologies to learn and adapt quickly.
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="openTool('slide-029-pdsa-templates-tool')">
+                        <div class="tool-title">PDSA Templates</div>
+                        <div class="tool-description">Structured Plan-Do-Study-Act worksheets for rapid cycle testing</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-320-develop-pdsa-ideas-to-generate-small-tests-of-chan')">
+                        <div class="tool-title">PDSA Development</div>
+                        <div class="tool-description">Generate and develop small-scale tests of change ideas</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-340-create-a-pdsa-worksheet-to-test-hourly-rounding-fo')">
+                        <div class="tool-title">PDSA Worksheets</div>
+                        <div class="tool-description">Create detailed testing plans for specific improvement interventions</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-358-reviewing-a-draft-pdsa-plan-to-point-out-missing-e')">
+                        <div class="tool-title">PDSA Review</div>
+                        <div class="tool-description">Review and improve PDSA plans to ensure completeness and effectiveness</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-359-summarising-and-framing-lessons-learned-from-a-pds')">
+                        <div class="tool-title">PDSA Lessons Learned</div>
+                        <div class="tool-description">Summarize and frame insights from completed PDSA cycles</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-032-qi-playbooks-tool')">
+                        <div class="tool-title">QI Playbooks</div>
+                        <div class="tool-description">Standardized approaches for common quality improvement scenarios</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-355-act-as-an-assistant-qi-coach-to-help-a-team-reflec')">
+                        <div class="tool-title">QI Coaching</div>
+                        <div class="tool-description">Guide teams through reflection and learning from improvement efforts</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-359-preparing-for-a-coaching-session-by-generating-coa')">
+                        <div class="tool-title">Coaching Preparation</div>
+                        <div class="tool-description">Generate coaching questions and frameworks for team sessions</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-376-conduct-a-failure-modes-and-effects-analysis-fmea-')">
+                        <div class="tool-title">FMEA Analysis</div>
+                        <div class="tool-description">Conduct comprehensive failure mode and effects analysis</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-299-summarize-a-meeting')">
+                        <div class="tool-title">Meeting Summarization</div>
+                        <div class="tool-description">Capture key decisions and action items from improvement team meetings</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-308-summarise-a-team-meeting-from-raw-notes-or-a-trans')">
+                        <div class="tool-title">Team Meeting Summary</div>
+                        <div class="tool-description">Transform raw meeting notes into actionable summaries</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-309-summarise-multiple-safety-incident-reports-for-a-w')">
+                        <div class="tool-title">Safety Incident Analysis</div>
+                        <div class="tool-description">Analyze patterns across multiple safety incidents for improvement opportunities</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-318-write-a-simple-clear-explanation-of-a-near-miss-fo')">
+                        <div class="tool-title">Near Miss Reporting</div>
+                        <div class="tool-description">Create clear explanations of near miss events for learning and prevention</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-310-draft-emails-to-give-units-feedback-on-their-safet')">
+                        <div class="tool-title">Safety Feedback</div>
+                        <div class="tool-description">Draft constructive feedback emails for safety performance</div>
+                    </div>
+                </div>
+                <button class="next-section-btn" onclick="activateSection('section5')">Complete Testing Changes → Move to Implementing Changes</button>
+            </div>
+        </div>
+
+        <div class="workflow-section" id="section5">
+            <div class="section-header" onclick="toggleSection('section5')">
+                <h2><span class="section-icon">🚀</span> Implementing Changes</h2>
+                <div>
+                    <span class="section-badge">10 tools</span>
+                    <span class="collapse-indicator">▼</span>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="section-intro">
+                    <strong>Purpose:</strong> Implement changes that have proven successful in testing. Focus on scaling, sustainability, and spreading improvements throughout the organization.
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card" onclick="openTool('slide-021-implementation-checklists-tool')">
+                        <div class="tool-title">Implementation Checklists</div>
+                        <div class="tool-description">Comprehensive checklists to ensure successful change implementation</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-033-raci-matrices-tool')">
+                        <div class="tool-title">RACI Matrices</div>
+                        <div class="tool-description">Define roles and responsibilities for implementation teams</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-018-gantt-charts-tool')">
+                        <div class="tool-title">Gantt Charts</div>
+                        <div class="tool-description">Create detailed project timelines and track implementation progress</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-002-adoption-curves-tool')">
+                        <div class="tool-title">Adoption Curves</div>
+                        <div class="tool-description">Understand and plan for different adoption rates across user groups</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-041-sustainability-matrices-tool')">
+                        <div class="tool-title">Sustainability Matrices</div>
+                        <div class="tool-description">Assess and plan for long-term sustainability of improvements</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-008-communication-plans-tool')">
+                        <div class="tool-title">Communication Plans</div>
+                        <div class="tool-description">Develop comprehensive communication strategies for change rollout</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-403-create-a-project-planning-form-for-a-qi-project-li')">
+                        <div class="tool-title">Project Planning</div>
+                        <div class="tool-description">Create comprehensive project plans for quality improvement initiatives</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-323-prepare-for-an-accreditation-visit-by-reviewing-th')">
+                        <div class="tool-title">Accreditation Preparation</div>
+                        <div class="tool-description">Prepare for accreditation visits by reviewing improvement documentation</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-035-residency-posters-tool')">
+                        <div class="tool-title">Residency Posters</div>
+                        <div class="tool-description">Create educational and promotional materials for improvement initiatives</div>
+                    </div>
+                    <div class="tool-card" onclick="openTool('slide-293-a-strong-prompt-for-setting-an-ais-persona-as-a-qi')">
+                        <div class="tool-title">QI Coaching Persona</div>
+                        <div class="tool-description">Develop AI-assisted coaching support for ongoing improvement efforts</div>
+                    </div>
+                </div>
+                <button class="next-section-btn" onclick="completeWorkflow()">Complete Implementation → Workflow Complete!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for displaying tools -->
+    <div id="toolModal" class="tool-modal">
+        <div class="tool-modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="loadingIndicator" style="text-align: center; padding: 40px; display: none;">
+                <div class="loading-spinner"></div>
+                <p style="margin-top: 20px; color: #666;">Loading tool...</p>
+            </div>
+            <div id="modalToolContent"></div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('active');
+        }
+        
+        function activateSection(sectionId) {
+            // Remove active from all sections
+            document.querySelectorAll('.workflow-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Activate target section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update progress indicators
+            updateProgress();
+        }
+        
+        function updateProgress() {
+            // Logic to update progress steps and line
+            const activeSection = document.querySelector('.workflow-section.active');
+            const sectionNumber = activeSection.id.replace('section', '');
+            
+            document.querySelectorAll('.progress-step').forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index + 1 < parseInt(sectionNumber)) {
+                    step.classList.add('completed');
+                } else if (index + 1 === parseInt(sectionNumber)) {
+                    step.classList.add('active');
+                }
+            });
+            
+            // Update progress line
+            const progressFill = document.querySelector('.progress-line-fill');
+            const progressPercent = ((parseInt(sectionNumber) - 1) / 4) * 100;
+            progressFill.style.width = progressPercent + '%';
+        }
+        
+        // Tool file mapping
+        const toolFileMap = {
+            'aim-statements': 'slide-003-aim-statements-tool.html',
+            'problem-definition': 'slide-031-problem-definition-tool.html',
+            'stakeholder-mapping': 'slide-040-stakeholder-mapping-tool.html',
+            'voice-of-customer': 'slide-046-voice-of-customer-tool.html',
+            'balanced-scorecards': 'slide-004-balanced-scorecards-tool.html',
+            'benchmarking': 'slide-005-benchmarking-tool.html',
+            'logic-models': 'slide-024-logic-models-tool.html',
+            'customer-journey': 'slide-011-customer-journey-mapping-tool.html',
+            'run-charts': 'slide-037-run-charts-tool.html',
+            'control-charts': 'slide-009-control-charts-tool.html',
+            'pareto-charts': 'slide-028-pareto-charts-tool.html',
+            'histograms': 'slide-019-histograms-tool.html',
+            'scatter-plots': 'slide-039-scatter-plots-tool.html',
+            'box-plots': 'slide-006-box-plots-tool.html'
+        };
+
+        async function openTool(toolId) {
+            const modal = document.getElementById('toolModal');
+            const modalContent = document.getElementById('modalToolContent');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            
+            // Show modal and loading state
+            modal.style.display = 'block';
+            modalContent.innerHTML = '';
+            loadingIndicator.style.display = 'block';
+            
+            try {
+                // Determine filename - either from map or direct ID
+                const filename = toolFileMap[toolId] || `${toolId}.html`;
+                const response = await fetch(`ihi/enhanced/${filename}`);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load tool: ${response.status}`);
+                }
+                
+                const toolHtml = await response.text();
+                
+                // Hide loading and show content
+                loadingIndicator.style.display = 'none';
+                modalContent.innerHTML = toolHtml;
+                
+                // Initialize card functionality for the loaded tool
+                initializeToolCard();
+                
+            } catch (error) {
+                loadingIndicator.style.display = 'none';
+                modalContent.innerHTML = `
+                    <div style="padding: 40px; text-align: center; color: #666;">
+                        <h3>Tool Not Available</h3>
+                        <p>Sorry, the tool "${toolId}" could not be loaded.</p>
+                        <p style="font-size: 14px; color: #999;">Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function initializeToolCard() {
+            const modal = document.getElementById('toolModal');
+            const card = modal.querySelector('.card');
+            
+            if (card) {
+                // Move buttons from footer to header
+                moveButtonsToHeader(card);
+                
+                // Set up card flip functionality
+                const revealButton = card.querySelector('.reveal-button');
+                const backButton = card.querySelector('.back-button');
+                const copyButton = card.querySelector('.copy-button');
+                
+                if (revealButton) {
+                    revealButton.addEventListener('click', () => {
+                        card.setAttribute('aria-expanded', 'true');
+                    });
+                }
+                
+                if (backButton) {
+                    backButton.addEventListener('click', () => {
+                        card.setAttribute('aria-expanded', 'false');
+                    });
+                }
+                
+                if (copyButton) {
+                    copyButton.addEventListener('click', () => {
+                        const promptText = card.querySelector('.prompt-text');
+                        if (promptText) {
+                            navigator.clipboard.writeText(promptText.innerText).then(() => {
+                                const originalText = copyButton.textContent;
+                                copyButton.textContent = 'Copied!';
+                                copyButton.style.background = '#28a745';
+                                setTimeout(() => {
+                                    copyButton.textContent = originalText;
+                                    copyButton.style.background = '';
+                                }, 2000);
+                            });
+                        }
+                    });
+                }
+            }
+        }
+        
+        function moveButtonsToHeader(card) {
+            const cardBack = card.querySelector('.card-back');
+            const cardFooter = card.querySelector('.card-footer');
+            
+            if (cardBack && cardFooter) {
+                // Check if header already exists
+                let cardHeader = cardBack.querySelector('.card-header');
+                
+                if (!cardHeader) {
+                    // Create header element
+                    cardHeader = document.createElement('div');
+                    cardHeader.className = 'card-header';
+                    
+                    // Move buttons from footer to header
+                    const copyButton = cardFooter.querySelector('.copy-button');
+                    const backButton = cardFooter.querySelector('.back-button');
+                    
+                    if (backButton) {
+                        const clonedBackButton = backButton.cloneNode(true);
+                        cardHeader.appendChild(clonedBackButton);
+                    }
+                    
+                    if (copyButton) {
+                        const clonedCopyButton = copyButton.cloneNode(true);
+                        cardHeader.appendChild(clonedCopyButton);
+                    }
+                    
+                    // Insert header as first child of card-back
+                    cardBack.insertBefore(cardHeader, cardBack.firstChild);
+                }
+            }
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('toolModal');
+            modal.style.display = 'none';
+        }
+        
+        function completeWorkflow() {
+            alert('Congratulations! You have completed the IHI Model for Improvement workflow. Your quality improvement journey is ready to begin implementation!');
+        }
+        
+        // Keyboard support for modal
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modal = document.getElementById('toolModal');
+                if (modal.style.display === 'block') {
+                    closeModal();
+                }
+            }
+        });
+        
+        // Click outside modal to close
+        document.getElementById('toolModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>

@@ -7,39 +7,88 @@
     </div>
     <div class="card-back">
       <div class="prompt-text" style="margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
-**Comprehensive Healthcare Quality Improvement Initiative**
+You are an Excel formula specialist with deep expertise in healthcare quality metrics and CDC/NHSN CLABSI rate calculations. Your task is to create a precise 12-month rolling CLABSI rate formula following IHI run chart methodology.
 
-**Clinical Excellence Framework:**
-- Evidence-based practice integration with systematic literature review
-- Regulatory compliance with Joint Commission, CMS, and AHRQ standards  
-- Patient safety risk assessment and mitigation protocols
-- Clinical workflow optimization and staff engagement strategies
+## Context &amp; Requirements
+- **Metric**: CLABSI rate per 1,000 central line days
+- **Formula**: (Number of CLABSIs ÷ Central Line Days) × 1,000
+- **Period**: 12-month rolling calculation
+- **Data location**: CLABSIs in column B, Central Line Days in column C, starting row 2
 
-**IHI Methodology Integration:**
-- Institute for Healthcare Improvement quality frameworks application
-- Plan-Do-Study-Act (PDSA) rapid cycle improvement methodology
-- Statistical process control and data-driven decision making
-- Sustainability planning and spread strategies
+## Step-by-Step Implementation
 
-**Implementation Specifications:**
-1. **Multidisciplinary Team Formation:** Clinical champions, quality professionals, frontline staff
-2. **Baseline Assessment:** Current state analysis with data collection and trend identification
-3. **Intervention Design:** Evidence-based improvement strategies with clear objectives
-4. **Measurement Plan:** Process, outcome, and balancing measures with data collection protocols
-5. **Communication Strategy:** Stakeholder engagement and progress reporting frameworks
-6. **Resource Planning:** Budget, technology, and staff requirements assessment
+### Phase 1: Build Core Formula
+Think through the calculation logic:
+1. Sum 12 months of CLABSI events (numerator)
+2. Sum 12 months of central line days (denominator)
+3. Calculate rate per 1,000
+4. Handle edge cases
 
-**Quality Assurance &amp; Risk Management:**
-- Clinical governance oversight and approval processes
-- Patient safety monitoring with adverse event tracking
-- Unintended consequence identification and mitigation
-- Regulatory compliance validation and accreditation alignment
+Provide this exact formula for cell D14:
+```excel
+=IFERROR(
+  IF(SUM(OFFSET(C2,ROW()-14,0,12,1))=0,
+     "No CL days",
+     (SUM(OFFSET(B2,ROW()-14,0,12,1))/SUM(OFFSET(C2,ROW()-14,0,12,1)))*1000),
+  "Check data")
+```
 
-**Expected Outcomes:**
-- Measurable improvement in clinical quality indicators
-- Enhanced patient safety and experience scores
-- Improved staff satisfaction and workflow efficiency
-- Sustainable practice changes with long-term impact
+### Phase 2: Add Data Quality Checks
+Create validation formula for column E to flag issues:
+```excel
+=IF(COUNTBLANK(OFFSET(B2,ROW()-14,0,12,1))&gt;2,"Missing data",
+   IF(SUM(OFFSET(C2,ROW()-14,0,12,1))&lt;100,"Low volume","OK"))
+```
+
+### Phase 3: Generate Run Chart Elements
+Calculate these IHI-standard control elements:
+- Median line: `=MEDIAN(D14:D[current_row])`
+- Mean line: `=AVERAGE(D14:D[current_row])`
+- Signal detection: Flag if 6+ consecutive points above/below median
+
+### Example with Real Data
+Given this sample data:
+| Month | CLABSIs | CL Days | Rate | 12-Mo Roll |
+|-------|---------|---------|------|------------|
+| Jan-23| 2       | 1,850   | 1.08 | (wait)     |
+| Feb-23| 1       | 1,720   | 0.58 | (wait)     |
+| ...   | ...     | ...     | ...  | ...        |
+| Jan-24| 3       | 2,100   | 1.43 | 1.15       |
+
+The January 2024 rolling rate = (Sum of 12 months: 25 CLABSIs) ÷ (Sum of 12 months: 21,750 CL days) × 1,000 = 1.15
+
+### Progressive Complexity Options
+
+**BASIC** (Quick start):
+```excel
+=AVERAGE(OFFSET(D2,ROW()-14,0,12,1))
+```
+
+**INTERMEDIATE** (With proper rate calculation):
+```excel
+=(SUM(OFFSET(B2,ROW()-14,0,12,1))/SUM(OFFSET(C2,ROW()-14,0,12,1)))*1000
+```
+
+**ADVANCED** (Full error handling and validation):
+[Use the complete formula from Phase 1]
+
+### Troubleshooting Guide
+If you see:
+- "#DIV/0!" → Check for zero central line days
+- "#REF!" → Verify data range exists
+- "No CL days" → Expected when denominator is zero
+- Unexpected rates → Verify you're summing 12 months, not averaging monthly rates
+
+### Copy-Paste Instructions
+1. Place formula in row 14 (ensures 12 months of data)
+2. Copy down through your entire dataset
+3. Format cells as Number with 2 decimal places
+4. Add conditional formatting: Red if &gt;2.0, Green if &lt;1.0
+
+Would you like me to:
+A) Adjust for your specific data structure?
+B) Add NHSN risk adjustment calculations?
+C) Create a dynamic version that auto-updates monthly?
       </div>
       <div class="card-footer">
         <button class="copy-button">Copy</button>
