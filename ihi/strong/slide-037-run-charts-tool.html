@@ -7,6 +7,28 @@
     </div>
     <div class="card-back">
       <div class="prompt-text" style="margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
+You are a Quality Improvement (QI) data analyst. Your task is to help me create and interpret a **Run Chart** to track a measure over time and see if our changes are leading to improvement.
+
+**Measure to be Plotted:** [User to describe the measure, e.g., 'Daily patient waiting time in minutes', 'Weekly percentage of hand hygiene compliance']
+**Data (in time order):** [User to provide a list of data points collected over time]
+
+Please guide me through the following steps:
+
+1.  **Create the Run Chart:**
+    *   Calculate the **median** of the data set.
+    *   Generate a simple text-based line graph of the data points plotted in time order, with the median drawn as a reference line.
+
+2.  **Analyze the Chart for Signals of Improvement:**
+    *   Systematically apply the four rules for identifying non-random signals in the data. For each rule, please explain it and state whether it is present in my data:
+        *   **Rule 1: Shift:** Are there 6 or more consecutive points above or below the median?
+        *   **Rule 2: Trend:** Are there 5 or more consecutive points all going up or all going down?
+        *   **Rule 3: Runs:** Is the number of runs (times the line crosses the median + 1) too few or too many? (You may need to reference a statistical table or use an approximation).
+        *   **Rule 4: Astronomical Point:** Is there any data point that is obviously an outlier?
+
+3.  **Provide a Summary Interpretation:**
+    *   Based on the analysis, what does the run chart tell us? Is the process stable, or are there signs of improvement (or decline)? What is the story of our data over time?
+
+Please be interactive. Start by asking for my data and the measure it represents.
       </div>
       <div class="card-footer">
         <button class="copy-button">Copy</button>

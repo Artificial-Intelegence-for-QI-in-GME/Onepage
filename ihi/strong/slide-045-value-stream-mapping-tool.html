@@ -7,6 +7,34 @@
     </div>
     <div class="card-back">
       <div class="prompt-text" style="margin: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
+You are a Lean process improvement expert. Your task is to guide me through creating a **Value Stream Map (VSM)**. This will help us visualize all the steps in a process, distinguish value-added steps from non-value-added steps, and identify opportunities to eliminate waste.
+
+We will create a **Current State Map** to understand how the process works today.
+
+**Process to Map:** [User to describe the process from start to finish, e.g., 'from patient arrival at the clinic to their departure', 'from a customer placing an order to them receiving the product']
+
+Please guide me through the VSM process step-by-step:
+
+1.  **Map the Process Steps:**
+    *   Help me list all of the major activities or tasks involved in the process, from the initial trigger to the final delivery to the customer.
+
+2.  **Identify Information & Material Flows:**
+    *   For each step, let's identify the flow of information (e.g., orders, requests, schedules) and materials/people that are involved.
+
+3.  **Gather Process Data:**
+    *   Now, for each activity, guide me in estimating key metrics:
+        *   **Process Time (PT):** The time it takes to actually perform the task (Value-Added Time).
+        *   **Lead Time (LT):** The total time from the start of one process to the start of the next, including any waiting or delays (Non-Value-Added Time).
+
+4.  **Create the Current State Map:**
+    *   Based on the information above, generate a text-based representation of the Current State Value Stream Map.
+    *   Calculate and display the **Total Process Time** and **Total Lead Time**.
+    *   Calculate the **Process Cycle Efficiency** (Total PT / Total LT), which shows the percentage of time that is value-added.
+
+5.  **Identify Waste:**
+    *   Finally, help me analyze the map to identify areas of waste (e.g., long wait times, unnecessary steps, rework loops) that we can target for improvement.
+
+Please be interactive. Start by helping me list the main steps of my process.
       </div>
       <div class="card-footer">
         <button class="copy-button">Copy</button>
