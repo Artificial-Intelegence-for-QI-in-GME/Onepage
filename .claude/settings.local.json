@@ -15,7 +15,9 @@
       "Bash(curl:*)",
       "WebFetch(domain:www.ahrq.gov)",
       "mcp__brave_search__brave_web_search",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []
